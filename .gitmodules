@@ -13,3 +13,6 @@
 [submodule "bundle/vimwiki"]
 	path = bundle/vimwiki
 	url = git@github.com:weierophinney/vimwiki.git
+[submodule "bundle/html5.vim"]
+	path = bundle/html5.vim
+	url = https://github.com/othree/html5.vim.git
