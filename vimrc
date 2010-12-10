@@ -283,6 +283,8 @@ set scrolloff=3
 :let NERDTreeChDirMode=2
 :let NERDTreeBookmarksFile="$HOME/.vim/NERDTreeBookmarks"
 :let NERDTreeShowBookmarks=1
+:let NERDTreeShowHidden=1
+:let NERDTreeQuitOnOpen=1
 
 " vimwiki
 :let g:vimwiki_list = [{'path': '~/mydocs/wiki/'}]
@@ -356,6 +358,14 @@ vmap <C-k> [e`[V`]
 vmap <C-j> ]e`[V`]
 
 " TagList settings
-let Tlist_Display_Prototype = 1
-let Tlist_Display_Tag_Scope = 1
 nnoremap <silent> <F8> :TlistToggle<CR>
+let Tlist_Use_Right_Window = 1
+let Tlist_Compact_Format = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_File_Fild_Auto_Close = 1
+let Tlist_Inc_Winwidth = 0
+let Tlist_Close_On_Select = 1
+let Tlist_Process_File_Always = 1
+let Tlist_Display_Prototype = 0
+let Tlist_Display_Tag_Scope = 1
