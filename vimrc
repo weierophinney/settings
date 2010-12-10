@@ -76,12 +76,10 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Skeleton (template) files...
 :autocmd BufNewFile *.html 0r $HOME/.vim/skeleton.html
-:autocmd BufNewFile *.class.php 0r $HOME/.vim/skeleton.class.php
 
 " Note: The normal command afterwards deletes an ugly pending line and moves
 " the cursor to the middle of the file.
 autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
-
 
 " Highlight Searches
 :set highlight=lub

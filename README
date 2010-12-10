@@ -1,0 +1,30 @@
+This is my Vim configuration.
+
+It is the product of many years of Vim use -- though most of the changes
+have happened in three phases:
+
+ * When I first started learning Vim in 2001/2002.
+ * During my first couple of years at Zend, when I was looking for tools
+   to help make me more productive.
+ * Late 2010, when I started noticing a "revolution" in the Vim
+   community in terms of better ways to distribute and keep plugins
+   up-to-date (Vimana, Pathogen, etc.) as well as a lot of open-sourcing
+   of plugins via GitHub.
+
+There are some "oddities" that you'll find:
+ 
+ * I've mapped "jj" to "<Esc>". This allows me to keep my fingers in the
+   home row when switching modes.
+ * I've moved my tags and viewfiles outside my .vim directory; these are
+   transient, and I don't want to track them with Git.
+
+For the most part, however, I've simply got a number of oft-used
+plugins, and sane settings for my everyday use.
+
+Make sure you customize the vimrc file!
+
+Enjoy!
+
+-- 
+Matthew Weier O'Phinney
+http://weierophinney.net/matthew/
