@@ -119,12 +119,13 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 " command "Ltag"" is mapped to this function.
 :function! LoadTags(file)
 :   let tagspath = $HOME . "/.vim.tags/" . a:file
-:   echo tagspath
 :   let tagcommand = 'set tags+=' . tagspath
 :   execute tagcommand
 :endfunction
 :command! -nargs=1 Ltag :call LoadTags("<args>")
 :set tags+=$HOME/.vim.tags/framework
+:call LoadTags("framework")
+:call LoadTags("zf2")
 
 :let php_sql_query=1
 :let php_htmlInStrings=1
@@ -353,3 +354,8 @@ nmap <C-j> ]e
 " vmap <C-j> xp`[V`]
 vmap <C-k> [e`[V`]
 vmap <C-j> ]e`[V`]
+
+" TagList settings
+let Tlist_Display_Prototype = 1
+let Tlist_Display_Tag_Scope = 1
+nnoremap <silent> <F8> :TlistToggle<CR>
