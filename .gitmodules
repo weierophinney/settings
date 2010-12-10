@@ -1,0 +1,15 @@
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "bundle/vim-fugitive"]
+	path = bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "bundle/mustache.vim"]
+	path = bundle/mustache.vim
+	url = git@github.com:weierophinney/mustache.vim.git
+[submodule "bundle/vim-task"]
+	path = bundle/vim-task
+	url = git@github.com:weierophinney/vim-task.git
+[submodule "bundle/vimwiki"]
+	path = bundle/vimwiki
+	url = git@github.com:weierophinney/vimwiki.git

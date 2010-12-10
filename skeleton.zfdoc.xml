@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.loader.class-map-autoloader">
+    <title>The ClassMapAutoloader</title>
+
+    <sect2 id="zend.loader.class-map-autoloader.intro">
+        <title>Overview</title>
+    </sect2>
+
+    <sect2 id="zend.loader.class-map-autoloader.quick-start">
+        <title>Quick Start</title>
+    </sect2>
+
+    <sect2 id="zend.loader.class-map-autoloader.options">
+        <title>Configuration Options</title>
+
+        <variablelist>
+            <title>*Component* Options</title>
+
+            <varlistentry>
+                <term></term>
+
+                <listitem>
+                    <para>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </sect2>
+
+    <sect2 id="zend.loader.class-map-autoloader.methods">
+        <title>Available Methods</title>
+    </sect2>
+
+    <sect2 id="zend.loader.class-map-autoloader.examples">
+        <title>Examples</title>
+    </sect2>
+</sect1>

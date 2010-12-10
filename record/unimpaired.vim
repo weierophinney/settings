@@ -1,0 +1,1 @@
+{"generated_by":"Vimana-2010.09303","installer_type":"auto","version":0.2,"files":[{"checksum":"51b1a57c4337be1f6769f2c16d494a1f","file":"/home/matthew/.vim/plugin/unimpaired.vim"},{"checksum":"114d413820420632db3297c6fe6579d8","file":"/home/matthew/.vim/doc/unimpaired.txt"}],"package":"unimpaired.vim"}

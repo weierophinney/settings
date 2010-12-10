@@ -1,0 +1,23 @@
+        <refentry id="zend.loader.standard-autoloader.methods.">
+            <refnamediv>
+                <refname></refname>
+                <refpurpose></refpurpose>
+            </refnamediv>
+
+            <refsynopsisdiv>
+                <methodsynopsis>
+                    <methodname></methodname>
+                    <methodparam>
+                        <funcparams></funcparams>
+                    </methodparam>
+                </methodsynopsis>
+            </refsynopsisdiv>
+
+            <refsect1>
+                <title></title>
+
+                <para>
+                </para>
+            </refsect1>
+        </refentry>
+

@@ -1,0 +1,19 @@
+
+"Vimball" [Not edited] --No lines in buffer--
+".VimballRecord" 4L, 4169C
+E486: Pattern not found: ^\s*$
+".VimballRecord" 4L, 4169C written
+Vimball Archive
+extracted <autoload/camelcasemotion.vim>: 173 lines
+"~/.vim/autoload/camelcasemotion.vim" [NOT converted][New] 173L, 7735C written
+wrote /home/matthew/.vim/autoload/camelcasemotion.vim
+extracted <plugin/camelcasemotion.vim>: 204 lines
+"~/.vim/plugin/camelcasemotion.vim" [NOT converted][New] 204L, 9062C written
+wrote /home/matthew/.vim/plugin/camelcasemotion.vim
+extracted <doc/camelcasemotion.txt>: 183 lines
+"~/.vim/doc/camelcasemotion.txt" [NOT converted][New] 183L, 8242C written
+wrote /home/matthew/.vim/doc/camelcasemotion.txt
+did helptags
+".VimballRecord" 4L, 4169C
+E486: Pattern not found: ^\s*$
+".VimballRecord" 5L, 4372C written
