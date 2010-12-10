@@ -117,16 +117,16 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :command! -nargs=1 Pset :call PhpAccessor("<args>")
 
 " Load a tag file
-" Loads a tag file from ~/.vim/mytags/, based on the argument provided. The
+" Loads a tag file from ~/.vim.tags/, based on the argument provided. The
 " command "Ltag"" is mapped to this function.
 :function! LoadTags(file)
-:   let tagspath = $HOME . "/.vim/mytags/" . a:file
+:   let tagspath = $HOME . "/.vim.tags/" . a:file
 :   echo tagspath
 :   let tagcommand = 'set tags+=' . tagspath
 :   execute tagcommand
 :endfunction
 :command! -nargs=1 Ltag :call LoadTags("<args>")
-:set tags+=$HOME/.vim/mytags/framework
+:set tags+=$HOME/.vim.tags/framework
 
 :let php_sql_query=1
 :let php_htmlInStrings=1
