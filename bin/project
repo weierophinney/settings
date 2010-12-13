@@ -1,0 +1,9 @@
+#!/bin/bash
+CWD=`pwd`
+if [ -e $CWD/.vimproject ];then
+    exec vim -X -c "Project $CWD/.vimproject";
+elif [ -e $CWD/.project ];then
+    exec vim -X -c "Project $CWD/.project";
+else
+    exec vim -X -c Project;
+fi
