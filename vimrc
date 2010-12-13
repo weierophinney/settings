@@ -123,9 +123,10 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :   execute tagcommand
 :endfunction
 :command! -nargs=1 Ltag :call LoadTags("<args>")
-:set tags+=$HOME/.vim.tags/framework
-:call LoadTags("framework")
+" These are tag files I've created
+:call LoadTags("zf1")
 :call LoadTags("zf2")
+:call LoadTags("phpunit")
 
 :let php_sql_query=1
 :let php_htmlInStrings=1

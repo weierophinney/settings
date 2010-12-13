@@ -1,0 +1,15 @@
+#!/bin/sh
+echo "Enter the path to a directory containing PHP code you wish"
+echo "to create tags for:"
+read dir
+echo "Enter the name of the tagfile you wish to create:"
+read name
+
+cd $dir
+exec ctags-exuberant -f ~/.vim.tags/$name \
+-h ".php" -R \
+--exclude="\.svn" \
+--totals=yes \
+--tag-relative=yes \
+--fields=+afkst \
+--PHP-kinds=+cf 
