@@ -290,10 +290,6 @@ set scrolloff=3
 " vimwiki
 :let g:vimwiki_list = [{'path': '~/mydocs/wiki/'}]
 
-" SnippetsEMU
-" Map snippets key to ctrl-n
-" :let g:snippetsEmu_key = "<C-n>"
-
 " Color scheme
 " First line ensures we can have full spectrum of colors
 :set t_Co=256
@@ -304,6 +300,7 @@ set scrolloff=3
 
 " snipMate
 let g:snips_author = "Matthew Weier O'Phinney"
+let g:snippets_dir = $HOME . "/.vim/snippets/"
 
 " Highlight current line
 " source $HOME/.vim/plugin/highlight_cursor.vim

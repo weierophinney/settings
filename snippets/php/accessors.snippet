@@ -1,0 +1,24 @@
+/**
+ *
+ * set value for $3
+ * @param $2 $value
+ * @return $this
+ */
+public function set${1:VarName}(${2:Type} $value)
+{
+	$this->${3:propName} = $value;
+	return $this;
+}
+
+/**
+ * Get value for $3
+ *
+ * @return $2
+ */
+public function get$1()
+{
+	if (null !== $this->$3) {
+		$this->set$1(new $2());
+	}
+	return $this->$3;
+}
