@@ -77,7 +77,7 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 " Skeleton (template) files...
 :autocmd BufNewFile *.html 0r $HOME/.vim/skeleton.html
 
-" Note: The normal command afterwards deletes an ugly pending line and moves
+" Note: The "normal" command afterwards deletes an ugly pending line and moves
 " the cursor to the middle of the file.
 autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 
@@ -89,7 +89,7 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 
 " HTML tag closing macro
 :let g:closetag_html_style=1
-:autocmd Filetype html source $HOME/.vim/closetag.vim
+:autocmd Filetype html source $HOME . "/.vim/closetag.vim"
 
 " PHP options
 :function! PhpDocLoad()
@@ -100,20 +100,6 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :   inoremap ( ()<Left>
 :endfunction
 
-" Create accessors for a variable
-" Creates accessors for accvar, making the assumption that accvar is protected.
-:function! PhpAccessor(accvar)
-:   let uCased = substitute(a:accvar, "^.", "\\U\\0", "")
-:   let protected = '_' . a:accvar
-:   let getDocTag = "    /**\n     * Retrieve " . a:accvar . "\n     *\n     * @return mixed\n     */\n"
-:   let getFunc = "    public function get" . uCased . "()\n    {\n        return $this->" . protected . ";\n    }\n\n"
-:   let setDocTag = "    /**\n     * Set " . a:accvar . "\n     *\n     * @param mixed $value\n     * @return self\n     */\n"
-:   let setFunc = "    public function set" . uCased . "($value)\n    {\n        $this->" . protected . " = $value;\n        return $this;\n    }\n\n"
-:   let @z = getDocTag . getFunc . setDocTag . setFunc
-:   put! z
-:endfunction
-:command! -nargs=1 Pset :call PhpAccessor("<args>")
-
 " Load a tag file
 " Loads a tag file from ~/.vim.tags/, based on the argument provided. The
 " command "Ltag"" is mapped to this function.
@@ -123,11 +109,14 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :   execute tagcommand
 :endfunction
 :command! -nargs=1 Ltag :call LoadTags("<args>")
-" These are tag files I've created
+
+" These are tag files I've created; you may want to remove/change these for your
+" own usage.
 :call LoadTags("zf1")
 :call LoadTags("zf2")
 :call LoadTags("phpunit")
 
+" PHP syntax settings
 :let php_sql_query=1
 :let php_htmlInStrings=1
 :let php_folding=1
@@ -148,10 +137,10 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 ":inoremap <C-H> <ESC>:!phpm -e <C-R>=expand("<cword>")<CR><CR>
 ":nnoremap <C-H> <ESC>:!phpm -e <C-R>=expand("<cword>")<CR><CR>
 
-" JSLint (CTRL-L)
+" JSLint (CTRL-L when in a JS file)
 :autocmd FileType javascript noremap <C-L> :!/home/matthew/bin/jslint %<CR>
 
-" Make a print macro
+" Make a print macro (linux only)
 " :map <Leader>p :write !lpr<CR>
 :map <Leader>p :hardcopy<CR>
 
@@ -203,11 +192,6 @@ let perl_fold_blocks=1
 :set modeline
 :set modelines=4
 
-" HTML::Template, Smarty files
-:autocmd BufNewFile,BufRead *.templ set ft=html
-:autocmd BufNewFile,BufRead *.tmpl set ft=html
-:autocmd BufNewFile,BufRead *.tpl set ft=html
-
 " .inc, phpt, phtml, phps files as PHP
 :autocmd BufNewFile,BufRead *.inc set ft=php
 :autocmd BufNewFile,BufRead *.phpt set ft=php
@@ -238,10 +222,11 @@ let perl_fold_blocks=1
 :set backspace=start,eol,indent
 
 " Bash is my shell
+" Well, not really. But this makes CLI integration better.
 :let bash_is_sh=1
 
 " Mail options
-" Normalize comments
+" Normalize comments (",,c")
 :nmap  ,,c :%s/>\([^ ]\)/> \1/g<CR>
 :function! MkMail()
 :    set ft=mail
@@ -254,6 +239,7 @@ let perl_fold_blocks=1
 " <C-t> Opens a new tab, <C-w> closes current tab
 " Remember, gt goes to next tab, gT goes to previous; easier than using firefox
 " control sequences
+" I don't use tabs often, so I've disabled these for now.
 " :nmap <C-t> :tabnew<CR>
 " :imap <C-t> <ESC>:tabnew<CR>
 " :nmap <C-w> :tabclose<CR>
@@ -268,17 +254,14 @@ map <F5> :setlocal spell! spelllang=en_us<cr>
 " Use UTF-8 encoding
 :set encoding=utf-8
 
-" Highlight current line in insert mode.
-" autocmd InsertLeave * se nocul
-" autocmd InsertEnter * se cul 
-
 " Show info in ruler
 set laststatus=2
 
+" Scrolling options
 set scrolljump=5
 set scrolloff=3
 
-" NERDTree
+" NERDTree options
 :let NERDChristmasTree=1
 :let NERDTreeCaseSensitiveSort=1
 :let NERDTreeChDirMode=2
@@ -287,7 +270,7 @@ set scrolloff=3
 :let NERDTreeShowHidden=1
 :let NERDTreeQuitOnOpen=1
 
-" vimwiki
+" vimwiki options
 :let g:vimwiki_list = [{'path': '~/mydocs/wiki/'}]
 
 " Color scheme
@@ -298,7 +281,7 @@ set scrolloff=3
 " ACK support
 :set grepprg=ack-grep\ -a
 
-" snipMate
+" snipMate options
 let g:snips_author = "Matthew Weier O'Phinney"
 let g:snippets_dir = $HOME . "/.vim/snippets/"
 
@@ -316,14 +299,13 @@ let g:user_zen_settings = {
 \      'req':"require_once '';",
 \      'inc':"include_once '';",
 \      'thr':"throw new Exception();\n",
-\      'get':"/**\n * Get XXXX\n *\n * @return mixed\n */\npublic function getXXXX()\n{\n}\n\n",
-\      'set':"/**\n * Set XXXX\n *\n * @param  mixed $value\n * @return mixed\n */\npublic function setXXXX($value)\n{\n    $this->_XXXX = $value;\n    return $this;\n}\n\n"
 \    }
 \  }
 \}
 let g:user_zen_expandabbr_key = '<c-y>'
 let g:user_zen_complete_tag = 1
 
+" mustache.vim settings
 if has("autocmd")
     au  BufnewFile,BufRead *.mustache set syntax=mustache
 endif
@@ -355,7 +337,7 @@ nmap <C-j> ]e
 vmap <C-k> [e`[V`]
 vmap <C-j> ]e`[V`]
 
-" TagList settings
+" TagList options
 nnoremap <silent> <F8> :TlistToggle<CR>
 let Tlist_Use_Right_Window = 1
 let Tlist_Compact_Format = 1
