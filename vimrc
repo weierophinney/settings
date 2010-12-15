@@ -26,6 +26,10 @@ endif
 " Load vimrc in new tab with leader-v
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
+" "Hidden" buffers -- i.e., don't require saving before editing another file.
+" Calling quit will prompt you to save unsaved buffers anyways.
+:set hidden
+
 " I like tabstops of 4, and prefer spaces to tabs. I want the text width to be
 " 80, and for it to wrap. My default background is dark. I like syntax
 " highlighting.
@@ -44,6 +48,9 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 :set shiftround
 :set autoindent
 :set smartindent
+
+" "sudo" save:
+:cmap w!! w !sudo tee % >/dev/null
 
 " This is for mouse scrolling (primarily in GVIM)
 :map <M-Esc>[62~ <MouseDown>
@@ -349,3 +356,13 @@ let Tlist_Close_On_Select = 1
 let Tlist_Process_File_Always = 1
 let Tlist_Display_Prototype = 0
 let Tlist_Display_Tag_Scope = 1
+
+" paster.vim settings
+let g:PASTER_FORMAT = '-d "paste_format=textFormat"'
+let g:PASTER_TEXT_AREA = "paste_code"
+let g:PASTER_URI = "http://weierophinney.pastebin.com/post.php"
+let g:PASTER_BROWSER_COMMAND = "chrome"
+let g:PASTER_NICK = '-d "paste_email=matthew@weierophinney.net"'
+
+" Testing config precedence
+let g:MY_CONFIG_VALUE = "foo"

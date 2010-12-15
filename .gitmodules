@@ -22,3 +22,18 @@
 [submodule "bundle/snipmate.vim"]
 	path = bundle/snipmate.vim
 	url = https://github.com/weierophinney/snipmate.vim.git
+[submodule "bundle/vim-yankring"]
+	path = bundle/vim-yankring
+	url = https://github.com/chrismetcalf/vim-yankring.git
+[submodule "bundle/paster.vim"]
+	path = bundle/paster.vim
+	url = https://github.com/weierophinney/paster.vim.git
+[submodule "bundle/vim-surround"]
+	path = bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/vim-repeat"]
+	path = bundle/vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
+[submodule "bundle/vim-abolish"]
+	path = bundle/vim-abolish
+	url = https://github.com/tpope/vim-abolish.git
