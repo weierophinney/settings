@@ -2,7 +2,7 @@
 " Begin my settings!
 
 " Automatically reload .vimrc when changing
-" autocmd! bufwritepost .vimrc source! %
+autocmd! bufwritepost .vimrc source! %
 
 " Enable pathogen bundles
 " See http://www.vim.org/scripts/script.php?script_id=2332
@@ -42,6 +42,16 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 :set background=dark
 :syntax on
 :set tags=$HOME/.vim/doc/tags
+:set ttyfast
+:set showcmd
+:set showmode
+:set wildmenu
+:set wildmode=list:longest
+
+" This setting can be useful for determining how many lines of text you want to
+" yank. It will display the line number column, but lines will be the distance
+" from the current line.
+":set relativenumber
 
 " Added 2005-03-23 Based on http://www.perlmonks.org/index.pl?node_id=441738
 :set smarttab
@@ -172,6 +182,10 @@ imap <Leader>k <Esc>lki
 " The escape key is a long ways away. This maps it to the sequence ';;'
 :map! jj <esc>
 
+" Similarly, : takes two keystrokes, ; takes one; map the latter to the former
+" in normal mode to get to the commandline faster
+nnoremap ; :
+
 " Turn on filetype plugins
 :filetype plugin on
 :filetype plugin indent on
@@ -224,6 +238,7 @@ let perl_fold_blocks=1
 
 " Comment options
 :set formatoptions=qroctn2
+:set colorcolumn=80
 
 " Repair weird terminal/vim settings
 :set backspace=start,eol,indent
@@ -287,6 +302,8 @@ set scrolloff=3
 
 " ACK support
 :set grepprg=ack-grep\ -a
+:let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+:map <Leader>a :Ack
 
 " snipMate options
 let g:snips_author = "Matthew Weier O'Phinney"
