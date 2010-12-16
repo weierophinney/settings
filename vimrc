@@ -358,11 +358,20 @@ let Tlist_Display_Prototype = 0
 let Tlist_Display_Tag_Scope = 1
 
 " paster.vim settings
+" These settings will paste to weierophinney.pastebin.com
 let g:PASTER_FORMAT = '-d "paste_format=textFormat"'
 let g:PASTER_TEXT_AREA = "paste_code"
-let g:PASTER_URI = "http://weierophinney.pastebin.com/post.php"
-let g:PASTER_BROWSER_COMMAND = "chrome"
-let g:PASTER_NICK = '-d "paste_email=matthew@weierophinney.net"'
+let g:PASTER_URI = "http://pastebin.com/api_public.php"
+let g:PASTER_BROWSER_COMMAND = $HOME . "/bin/chrome"
+let g:PASTER_FIXED_ARGUMENTS = '-d "paste_subdomain=weierophinney"'
+let g:nickID = "weierophinney"
+let g:PASTER_RESPONSE_FLAG = "^http:"
+function! g:Paster_ParseLocationFrom(line)
+  let locator = "n/a"
 
-" Testing config precedence
-let g:MY_CONFIG_VALUE = "foo"
+  if (match(a:line, "^http:") > -1)
+    let locator = a:line
+  endif
+
+  return "Location: ".locator
+endfunction
