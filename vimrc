@@ -392,3 +392,6 @@ function! g:Paster_ParseLocationFrom(line)
 
   return "Location: ".locator
 endfunction
+
+" argumentrewrap binding
+nnoremap <silent> <leader>r :call argumentrewrap#RewrapArguments()<CR>
