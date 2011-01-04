@@ -395,3 +395,6 @@ endfunction
 
 " argumentrewrap binding
 nnoremap <silent> <leader>r :call argumentrewrap#RewrapArguments()<CR>
+
+" supertab settings
+let g:SuperTabDefaultCompletionType = "context"
