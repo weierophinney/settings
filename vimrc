@@ -291,6 +291,7 @@ set scrolloff=3
 :let NERDTreeShowBookmarks=1
 :let NERDTreeShowHidden=1
 :let NERDTreeQuitOnOpen=1
+:map <Leader>n :NERDTree<CR>
 
 " vimwiki options
 :let g:vimwiki_list = [{'path': '~/mydocs/wiki/'}]
@@ -398,3 +399,12 @@ nnoremap <silent> <leader>r :call argumentrewrap#RewrapArguments()<CR>
 
 " supertab settings
 let g:SuperTabDefaultCompletionType = "context"
+
+" tabular settings
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
+

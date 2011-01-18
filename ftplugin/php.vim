@@ -60,9 +60,6 @@ vnoremap <C-P> :call PhpDocRange()<CR>
 " Map <CTRL>-H to search phpm for the function name currently under the cursor (insert mode only)
 inoremap <C-H> <ESC>:!phpm <C-R>=expand("<cword>")<CR><CR>
 
-" Map <CTRL>-0 to alignment function
-vnoremap <C-0> :call PhpAlign()<CR>
-
 " Map <CTRL>-u to (un-)comment function
 vnoremap <C-u> :call PhpUnComment()<CR>
 
@@ -129,48 +126,6 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 " }}} Autocompletion using the TAB key
-
-" {{{ Alignment
-
-func! PhpAlign() range
-    let l:paste = &g:paste
-    let &g:paste = 0
-
-    let l:line        = a:firstline
-    let l:endline     = a:lastline
-    let l:maxlength = 0
-    while l:line <= l:endline
-		if getline (l:line) =~ '^\s*\/\/.*$'
-			let l:line = l:line + 1
-			continue
-		endif
-        let l:index = substitute (getline (l:line), '^\s*\(.\{-\}\)\s*=>\{0,1\}.*$', '\1', "") 
-        let l:indexlength = strlen (l:index)
-        let l:maxlength = l:indexlength > l:maxlength ? l:indexlength : l:maxlength
-        let l:line = l:line + 1
-    endwhile
-    
-	let l:line = a:firstline
-	let l:format = "%s%-" . l:maxlength . "s %s %s"
-    
-	while l:line <= l:endline
-		if getline (l:line) =~ '^\s*\/\/.*$'
-			let l:line = l:line + 1
-			continue
-		endif
-        let l:linestart = substitute (getline (l:line), '^\(\s*\).*', '\1', "")
-        let l:linekey   = substitute (getline (l:line), '^\s*\(.\{-\}\) *=>\{0,1\}.*$', '\1', "")
-        let l:linesep   = substitute (getline (l:line), '^\s*.* *\(=>\{0,1\}\).*$', '\1', "")
-        let l:linevalue = substitute (getline (l:line), '^\s*.* *=>\{0,1\}\s*\(.*\)$', '\1', "")
-
-        let l:newline = printf (l:format, l:linestart, l:linekey, l:linesep, l:linevalue)
-        call setline (l:line, l:newline)
-        let l:line = l:line + 1
-    endwhile
-    let &g:paste = l:paste
-endfunc
-
-" }}}   
 
 " {{{ (Un-)comment
 
