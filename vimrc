@@ -304,7 +304,7 @@ set scrolloff=3
 " ACK support
 :set grepprg=ack-grep\ -a
 :let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-:map <Leader>a :Ack
+:map <Leader>g :Ack
 
 " snipMate options
 let g:snips_author = "Matthew Weier O'Phinney"
