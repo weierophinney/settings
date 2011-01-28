@@ -46,3 +46,12 @@
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
+[submodule "bundle/mustache.vim"]
+	path = bundle/mustache.vim
+	url = https://github.com/weierophinney/mustache.vim.git
+[submodule "bundle/vim-task"]
+	path = bundle/vim-task
+	url = https://github.com/weierophinney/vim-task.git
+[submodule "bundle/vimwiki"]
+	path = bundle/vimwiki
+	url = https://github.com/weierophinney/vimwiki.git
