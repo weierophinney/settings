@@ -408,3 +408,7 @@ if exists(":Tabularize")
   vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
+" GUndo settings
+if exists(":GundoToggle")
+  nnoremap <F5> :GundoToggle<CR>
+endif
