@@ -270,8 +270,8 @@ let perl_fold_blocks=1
 " Disable spellcheck
 " let spell_auto_type = ""
 
-" Map <F5> to turn spelling on (VIM 7.0+)
-map <F5> :setlocal spell! spelllang=en_us<cr>
+" Map <S-F5> to turn spelling on (VIM 7.0+)
+map <S-F5> :setlocal spell! spelllang=en_us<cr>
 
 " Use UTF-8 encoding
 :set encoding=utf-8
