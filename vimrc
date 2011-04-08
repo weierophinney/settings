@@ -412,3 +412,7 @@ endif
 if exists(":GundoToggle")
   nnoremap <F5> :GundoToggle<CR>
 endif
+
+" vim-latex settings
+let g:tex_flavor='latex'
+set iskeyword+=:
