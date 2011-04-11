@@ -377,11 +377,11 @@ let Tlist_Display_Tag_Scope = 1
 
 " paster.vim settings
 " These settings will paste to weierophinney.pastebin.com
-let g:PASTER_FORMAT = '-d "paste_format=textFormat"'
-let g:PASTER_TEXT_AREA = "paste_code"
-let g:PASTER_URI = "http://pastebin.com/api_public.php"
+let g:PASTER_FORMAT = '-d "api_paste_format=textFormat"'
+let g:PASTER_TEXT_AREA = "api_paste_code"
+let g:PASTER_URI = "http://pastebin.com/api/api_post.php"
 let g:PASTER_BROWSER_COMMAND = $HOME . "/bin/chrome"
-let g:PASTER_FIXED_ARGUMENTS = '-d "paste_subdomain=weierophinney"'
+let g:PASTER_FIXED_ARGUMENTS = '-d "api_dev_key=fa5e9dc272b702d916c887e76deae4cc&api_option=paste"'
 let g:nickID = "weierophinney"
 let g:PASTER_RESPONSE_FLAG = "^http:"
 function! g:Paster_ParseLocationFrom(line)
