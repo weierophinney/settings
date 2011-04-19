@@ -73,3 +73,6 @@
 [submodule "bundle/vim-latex"]
 	path = bundle/vim-latex
 	url = https://github.com/weierophinney/vim-latex.github.com.git
+[submodule "bundle/gist-vim"]
+	path = bundle/gist-vim
+	url = https://github.com/weierophinney/gist-vim.git
