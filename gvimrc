@@ -1,4 +1,6 @@
 :colorscheme koehler
+" :set guifont=DejaVu\ Sans\ Mono\ Book\ 11
+" :set guifont=Droid\ Sans\ Mono\ 10
 :set guifont=Anonymous\ Pro\ 12
 " :set guifont=Monospace\ 11
 " :set guifont=Andale\ Mono\ 11

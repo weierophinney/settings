@@ -271,7 +271,7 @@ let perl_fold_blocks=1
 " let spell_auto_type = ""
 
 " Map <S-F5> to turn spelling on (VIM 7.0+)
-map <S-F5> :setlocal spell! spelllang=en_us<cr>
+map <S-F5> :setlocal spell spelllang=en_us<cr>
 
 " Use UTF-8 encoding
 :set encoding=utf-8
@@ -349,18 +349,9 @@ nnoremap <leader>f <C-w>s<C-w>j
 " This one is for the vim-fugitive plugin:
 :set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-" vimcasts #26: bubbling text
-" Modified to use unimpaired.vim (:he unimpaired)
-" Bubble single lines
-" nmap <C-k> ddkP
-" nmap <C-j> ddp
-nmap <C-k> [e
-nmap <C-j> ]e
-" " Bubble multiple lines
-" vmap <C-k> xkP`[V`]
-" vmap <C-j> xp`[V`]
-vmap <C-k> [e`[V`]
-vmap <C-j> ]e`[V`]
+" Added 16-Jun-2011: auto-cleans fugitive buffers
+" From http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
+autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " TagList options
 nnoremap <silent> <F8> :TlistToggle<CR>
@@ -416,3 +407,10 @@ endif
 " vim-latex settings
 let g:tex_flavor='latex'
 set iskeyword+=:
+
+" gist-vim settings
+let g:gist_clip_command = "xclip -selection clipboard"
+let g:gist_detect_filetype = 1
+let g:gist_browser_command = $HOME . "/bin/chrome %URL%"
+let g:gist_open_browser_after_post = 1
+let g:gist_show_privates = 1
