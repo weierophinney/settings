@@ -4,6 +4,9 @@
 " Automatically reload .vimrc when changing
 autocmd! bufwritepost .vimrc source! %
 
+" Disable the splash screen
+:set shortmess +=I
+
 " Enable pathogen bundles
 " See http://www.vim.org/scripts/script.php?script_id=2332
 " Put github plugins under .vim/bundle/ -- which allows keeping them updated
@@ -299,7 +302,8 @@ set scrolloff=3
 " Color scheme
 " First line ensures we can have full spectrum of colors
 :set t_Co=256
-:colorscheme elflord
+:let g:solarized_termcolors=256
+:colorscheme solarized
 
 " ACK support
 :set grepprg=ack-grep\ -a
