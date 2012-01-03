@@ -1,5 +1,5 @@
-public function set${1:VarName}(${2:Type} $value)
+public function set${1:VarName}($${2:propName})
 {
-    $this->${3:propName} = $value;
+    $this->$2 = $$2;
     return $this;
 }
