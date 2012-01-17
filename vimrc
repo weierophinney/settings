@@ -294,7 +294,7 @@ set scrolloff=3
 :let NERDTreeBookmarksFile = $HOME . "/.vim/NERDTreeBookmarks"
 :let NERDTreeShowBookmarks=1
 :let NERDTreeShowHidden=1
-:let NERDTreeQuitOnOpen=1
+:let NERDTreeQuitOnOpen=0
 :map <Leader>n :NERDTree<CR>
 
 " vimwiki options
