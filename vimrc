@@ -37,6 +37,7 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 " 80, and for it to wrap. My default background is dark. I like syntax
 " highlighting.
 :set nocompatible
+:set encoding=utf-8
 :set expandtab
 :set textwidth=80
 :set tabstop=4
@@ -418,3 +419,6 @@ let g:gist_detect_filetype = 1
 let g:gist_browser_command = $HOME . "/bin/chrome %URL%"
 let g:gist_open_browser_after_post = 1
 let g:gist_show_privates = 1
+
+" vim-powerline settings
+let g:Powerline_symbols="fancy"
