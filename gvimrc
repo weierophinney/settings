@@ -16,3 +16,7 @@ let &guicursor = &guicursor . ",a:blinkon0"
 " Do not display Toolbar or menus
 :set go-=T
 :set go-=m
+
+" In gvim, we can safely use the 'fancy' Powerline symbols
+let g:Powerline_symbols="fancy"
+let g:Powerline_cache_file="/home/matthew/tmp/Powerline-gvim.cache"

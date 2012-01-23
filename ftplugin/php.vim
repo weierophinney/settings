@@ -1,11 +1,6 @@
 " .vim/ftplugin/php.vim by Tobias Schlitt <toby@php.net>.
 " No copyright, feel free to use this, as you like.
 
-" My modifications
-set keywordprg=/usr/local/zend/bin/pman
-set dictionary+=~/.vim/dic/xdebug2
-" END My modifications
-
 " Including PDV
 source ~/.vim/php-doc.vim
 

@@ -121,6 +121,12 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :   inoremap ( ()<Left>
 :endfunction
 
+" Set keywordprg to use pman in PHP files
+:autocmd FileType php set keywordprg=/usr/local/zend/bin/pman
+
+" Add xdebug2 dictionary when in PHP files
+:autocmd FileType php set dictionary+=~/.vim/dic/xdebug2
+
 " Load a tag file
 " Loads a tag file from ~/.vim.tags/, based on the argument provided. The
 " command "Ltag"" is mapped to this function.
@@ -150,6 +156,9 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 
 " run file with PHP CLI (CTRL-M)
 :autocmd FileType php noremap <C-M> :w!<CR>:!$HOME/bin/php %<CR>
+
+" run file using PHPUnit (Leader-u)
+:autocmd FileType php noremap <Leader>u :!$HOME/bin/phpunit %<CR>
 
 " Run file with Ruby interpreter
 :autocmd FileType ruby noremap <C-M> :w!<CR>:!ruby %<CR>
@@ -421,4 +430,5 @@ let g:gist_open_browser_after_post = 1
 let g:gist_show_privates = 1
 
 " vim-powerline settings
-let g:Powerline_symbols="fancy"
+let g:Powerline_symbols="unicode"
+let g:Powerline_cache_file="/home/matthew/tmp/Powerline-vim.cache"
