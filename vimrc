@@ -153,13 +153,13 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :autocmd BufNewFile,BufRead *.php call PhpDocLoad()
 
 " PHP parser check (CTRL-L)
-:autocmd FileType php noremap <C-L> :!$HOME/bin/php -l %<CR>
+:autocmd FileType php noremap <C-L> :w!<CR>:!$HOME/bin/php -l %<CR>
 
 " run file with PHP CLI (CTRL-M)
 :autocmd FileType php noremap <C-M> :w!<CR>:!$HOME/bin/php %<CR>
 
 " run file using PHPUnit (Leader-u)
-:autocmd FileType php noremap <Leader>u :!$HOME/bin/phpunit %<CR>
+:autocmd FileType php noremap <Leader>u :w!<CR>:!!$HOME/bin/phpunit %<CR>
 
 " Run file with Ruby interpreter
 :autocmd FileType ruby noremap <C-M> :w!<CR>:!ruby %<CR>
