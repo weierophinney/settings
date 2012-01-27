@@ -43,6 +43,7 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 :set tabstop=4
 :set softtabstop=4
 :set shiftwidth=4
+:set number
 :set background=dark
 :syntax on
 :set tags=$HOME/.vim/doc/tags
