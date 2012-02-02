@@ -433,3 +433,10 @@ let g:gist_show_privates = 1
 " vim-powerline settings
 let g:Powerline_symbols="unicode"
 let g:Powerline_cache_file="/home/matthew/tmp/Powerline-vim.cache"
+
+" syntastic settings
+let g:syntastic_check_on_open=0
+let g:syntastic_auto_jump=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': ['php', 'javascript', 'JSON', 'html', 'sh', 'docbook', 'css', 'xml', 'xhtml'] }
