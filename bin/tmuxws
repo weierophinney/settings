@@ -1,0 +1,12 @@
+#!/usr/bin/zsh
+PROJECT=`basename $0`
+PROJECT=${PROJECT##*-}
+
+CONFFILE="$HOME/.tmux/$PROJECT.conf"
+
+if [ ! -e $CONFFILE ];then
+    echo "Tmux project by name '$PROJECT' not found"
+    exit 1
+fi
+
+exec tmux -f $CONFFILE attach
