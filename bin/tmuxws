@@ -1,4 +1,7 @@
 #!/usr/bin/zsh
+# Symlink this to files named "tmux-<project>", where <project> corresponds to a
+# $HOME/.tmux/<project>.conf file. This will then start tmux using that
+# configuration file, and attach to the session it creates.
 PROJECT=`basename $0`
 PROJECT=${PROJECT##*-}
 
