@@ -194,7 +194,8 @@ imap <Leader>k <Esc>lki
 :so $HOME/.vim/bufreplace.vim
 
 " The escape key is a long ways away. This maps it to the sequence ';;'
-:map! jj <esc>
+" :map! jj <esc>
+inoremap <Ctrl>[ <Esc>
 
 " Similarly, : takes two keystrokes, ; takes one; map the latter to the former
 " in normal mode to get to the commandline faster

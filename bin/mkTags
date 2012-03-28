@@ -37,6 +37,7 @@ echo "Creating tags for directory '$dir' using alias '$name'"
 cd $dir
 exec ctags-exuberant -f ~/.vim.tags/$name \
 -h ".php" -R \
+--extra=+f \
 --exclude="\.svn" \
 --totals=yes \
 --tag-relative=yes \
