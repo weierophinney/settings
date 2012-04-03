@@ -91,3 +91,6 @@
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/inline_edit"]
+	path = bundle/inline_edit
+	url = git://github.com/AndrewRadev/inline_edit.vim.git
