@@ -193,13 +193,8 @@ imap <Leader>k <Esc>lki
 " Replace across buffers script
 :so $HOME/.vim/bufreplace.vim
 
-" The escape key is a long ways away. This maps it to the sequence ';;'
-" :map! jj <esc>
-inoremap <Ctrl>[ <Esc>
-
-" Similarly, : takes two keystrokes, ; takes one; map the latter to the former
-" in normal mode to get to the commandline faster
-nnoremap ; :
+" The escape key is a long ways away. This maps it to the sequence 'kj'
+:map! kj <esc>
 
 " Turn on filetype plugins
 :filetype plugin on
@@ -253,7 +248,6 @@ let perl_fold_blocks=1
 
 " Comment options
 :set formatoptions=qroctn2
-:set colorcolumn=80
 
 " Repair weird terminal/vim settings
 :set backspace=start,eol,indent
