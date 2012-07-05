@@ -444,3 +444,6 @@ let g:syntastic_mode_map = { 'mode': 'active',
 nnoremap <leader>e :InlineEdit<cr>
 xnoremap <leader>e :InlineEdit<cr>
 inoremap <c-e> <esc>:InlineEdit<cr>a
+
+" Toggle numbers mode (numbers.vim)
+nnoremap <Leader>t :NumbersToggle<CR>
