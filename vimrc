@@ -165,6 +165,9 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 " run file using PHPUnit (Leader-u)
 :autocmd FileType php noremap <Leader>u :w!<CR>:!!$HOME/bin/phpunit %<CR>
 
+" Trim trailing whitespace and \r characters
+autocmd FileType c,cpp,java,php,javascript,python,twig,xml,yml,phtml,vimrc autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
 " Run file with Ruby interpreter
 :autocmd FileType ruby noremap <C-M> :w!<CR>:!ruby %<CR>
 
