@@ -1,9 +1,6 @@
 " Vim syntax file
 " Begin my settings!
 
-" Automatically reload .vimrc when changing
-autocmd! bufwritepost .vimrc source! %
-
 " Disable the splash screen
 :set shortmess +=I
 
@@ -144,7 +141,7 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 
 " These are tag files I've created; you may want to remove/change these for your
 " own usage.
-:call LoadTags("zf1")
+" :call LoadTags("zf1")
 :call LoadTags("zf2")
 :call LoadTags("phpunit")
 
@@ -157,16 +154,16 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :autocmd BufNewFile,BufRead *.php call PhpDocLoad()
 
 " PHP parser check (CTRL-L)
-:autocmd FileType php noremap <C-L> :w!<CR>:!$HOME/bin/php -l %<CR>
+:autocmd FileType php noremap <C-L> :w!<CR>:!$HOME/bin/php-5.4 -l %<CR>
 
 " run file with PHP CLI (CTRL-M)
-:autocmd FileType php noremap <C-M> :w!<CR>:!$HOME/bin/php %<CR>
+:autocmd FileType php noremap <C-M> :w!<CR>:!$HOME/bin/php-5.4 %<CR>
 
 " run file using PHPUnit (Leader-u)
 :autocmd FileType php noremap <Leader>u :w!<CR>:!!$HOME/bin/phpunit %<CR>
 
 " Trim trailing whitespace and \r characters
-autocmd FileType c,cpp,java,php,javascript,python,twig,xml,yml,phtml,vimrc autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+" autocmd FileType c,cpp,java,php,javascript,python,twig,xml,yml,phtml,vimrc autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " Run file with Ruby interpreter
 :autocmd FileType ruby noremap <C-M> :w!<CR>:!ruby %<CR>
@@ -460,3 +457,10 @@ let g:php_cs_fixer_fixers_list = ""             " List of fixers
 let g:php_cs_fixer_default_mapping = 0          " Enable the mapping by default (<leader>pcd)
 let g:php_cs_fixer_dry_run = 0                  " Call command with dry-run option
 map <leader>pcf :call PhpCsFixerFixFile()<CR>
+
+" Switch.vim
+nnoremap <leader>- :Switch<cr>
+autocmd FileType php let b:switch_definitions =
+    \ [
+    \   ['<?=', '<?php echo']
+    \ ]
