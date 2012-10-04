@@ -49,6 +49,12 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 :set showmode
 :set wildmenu
 :set wildmode=list:longest
+:set undofile
+
+" Remap F1 to escape, because that happens a lot when reaching. :)
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
 
 " " Via https://twitter.com/vimtips/status/208241766816677889
 " " Allows all operations to work with system clipboard
@@ -109,6 +115,7 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :map <Leader>s :set hlsearch<CR>
 :map <Leader>S :set nohlsearch<CR>
 :set incsearch
+:set showmatch
 
 " HTML tag closing macro
 :let g:closetag_html_style=1
@@ -223,9 +230,8 @@ let perl_extended_vars=1
 let perl_fold=1
 let perl_fold_blocks=1
 
-" Turn on modelines
-:set modeline
-:set modelines=4
+" Turn off modelines
+:set modelines=0
 
 " .inc, phpt, phtml, phps files as PHP
 :autocmd BufNewFile,BufRead *.inc set ft=php
@@ -366,6 +372,15 @@ nnoremap <leader>f <C-w>s<C-w>j
 " Added 16-Jun-2011: auto-cleans fugitive buffers
 " From http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
 autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" Markdown helpers
+" <leader>1 creates the ==== lines below a header
+" <leader>2 creates the ---- lines below a header
+" <leader>3 creates the ^^^^ lines below a header
+" Suggested by http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+nnoremap <leader>1 yypVr=
+nnoremap <leader>2 yypVr-
+nnoremap <leader>3 yypVr^
 
 " TagList options
 nnoremap <silent> <F8> :TlistToggle<CR>
