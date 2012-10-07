@@ -13,8 +13,9 @@ have happened in three phases:
 
 There are some "oddities" that you'll find:
  
- * I've mapped "jj" to "<Esc>". This allows me to keep my fingers in the
-   home row when switching modes.
+ * I've mapped "kj" to "<Esc>". This allows me to keep my fingers in the
+   home row when switching modes, and to do so in a way that doesn't put
+   stress on a single finger.
  * I've moved my tags and viewfiles outside my .vim directory; these are
    transient, and I don't want to track them with Git.
 
