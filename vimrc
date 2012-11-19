@@ -22,6 +22,7 @@ let mapleader = ","
 " Auto-reload vimrc on save
 if has("autocmd")
     autocmd bufwritepost .vimrc source $MYVIMRC
+    filetype plugin indent on
 endif
 " Load vimrc in new tab with leader-v
 nmap <leader>v :tabedit $MYVIMRC<CR>
