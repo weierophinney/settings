@@ -90,13 +90,9 @@ vnoremap <F1> <ESC>
 :nnoremap / /\v
 :vnoremap / /\v
 
-" Folding -- allows me to toggle display of comment lines
-" Then, do a :g/^\s*#/,/^\s*[^#]/-fold
-:set foldenable foldmethod=manual
-
-" new folding options 2005-05-21
-":set foldenable foldmethod=marker
-":set foldclose=all
+" Folding
+" Toggle folding with spacebar instead of za
+nnoremap <Space> za
 
 " Pasting toggle...
 :set pastetoggle=<Ins>
