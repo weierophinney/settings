@@ -316,6 +316,7 @@ set scrolloff=3
 " First line ensures we can have full spectrum of colors
 :set t_Co=256
 " :let g:solarized_termcolors=256
+:let g:solarized_termtrans=1
 :colorscheme solarized
 
 " ACK support
@@ -476,3 +477,10 @@ autocmd FileType php let b:switch_definitions =
     \ [
     \   ['<?=', '<?php echo']
     \ ]
+
+" Yank text to the clipboard easier
+noremap <leader>y "*y
+noremap <leader>yy "*Y
+
+" Preserve indentation while pasting text from the OS X clipboard
+noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
