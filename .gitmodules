@@ -109,3 +109,6 @@
 [submodule "bundle/vimux"]
 	path = bundle/vimux
 	url = git://github.com/benmills/vimux.git
+[submodule "bundle/vim-markdown-folding"]
+	path = bundle/vim-markdown-folding
+	url = git://github.com/nelstrom/vim-markdown-folding.git
