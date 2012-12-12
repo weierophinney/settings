@@ -379,6 +379,10 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 nnoremap <leader>1 yypVr=
 nnoremap <leader>2 yypVr-
 nnoremap <leader>3 yypVr^
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown,*.mkd setlocal filetype=ghmarkdown
+augroup END
 
 " TagList options
 nnoremap <silent> <F8> :TlistToggle<CR>
