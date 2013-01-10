@@ -38,7 +38,7 @@ ZSH_THEME="pygmalion"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git command-not-found composer git-extras git-flow github git-remote-branch history history-substring-search last-working-dir rsync ssh-agent svn themes urltools)
+plugins=(git command-not-found composer git-extras git-flow github git-remote-branch history history-substring-search rsync ssh-agent svn themes urltools)
 
 source $ZSH/oh-my-zsh.sh
 
