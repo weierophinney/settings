@@ -462,9 +462,6 @@ nnoremap <leader>e :InlineEdit<cr>
 xnoremap <leader>e :InlineEdit<cr>
 inoremap <c-e> <esc>:InlineEdit<cr>a
 
-" Toggle numbers mode (numbers.vim)
-nnoremap <Leader>t :NumbersToggle<CR>
-
 " vim-php-cs-fixer
 let g:php_cs_fixer_path = "~/bin/php-cs-fixer"  " define the path to the php-cs-fixer.phar
 let g:php_cs_fixer_level = "psr2"               " which level ?
