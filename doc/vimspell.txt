@@ -342,7 +342,7 @@ CONTENT                                                    *vimspell-contents*
       ones) overrides, if exists, the spell_{language}_iskeyword variables.
       The list must be empty or begin with a comma.
       The following is defined: >
-	   let spell_francais_iskeyword  =  "39,½,æ,¼,Æ,-"
+	   let spell_francais_iskeyword  =  "39,Â½,Ã¦,Â¼,Ã†,-"
 <     which says that the quote, the hyphen and dome other digraphs must be
       considered as being part of words.
 
