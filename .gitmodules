@@ -112,3 +112,6 @@
 [submodule "bundle/vim-flavored-markdown"]
 	path = bundle/vim-flavored-markdown
 	url = git://github.com/jtratner/vim-flavored-markdown.git
+[submodule "bundle/vim-movar"]
+	path = bundle/vim-movar
+	url = git://github.com/robmiller/vim-movar.git
