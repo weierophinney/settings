@@ -299,15 +299,8 @@ set laststatus=2
 set scrolljump=5
 set scrolloff=3
 
-" NERDTree options
-:let NERDChristmasTree=1
-:let NERDTreeCaseSensitiveSort=1
-:let NERDTreeChDirMode=2
-:let NERDTreeBookmarksFile = $HOME . "/.vim/NERDTreeBookmarks"
-:let NERDTreeShowBookmarks=1
-:let NERDTreeShowHidden=1
-:let NERDTreeQuitOnOpen=0
-:map <Leader>n :NERDTree<CR>
+" netrw options
+:map <Leader>n :edit .<CR>
 
 " vimwiki options
 :let g:vimwiki_list = [{'path': '~/mydocs/wiki/'}]
