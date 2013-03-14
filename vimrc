@@ -90,6 +90,9 @@ vnoremap <F1> <ESC>
 :nnoremap / /\v
 :vnoremap / /\v
 
+" Execute last command over a visual selection
+:vnoremap . :norm.<CR>
+
 " Folding
 " Toggle folding with spacebar instead of za
 nnoremap <Space> za
@@ -300,7 +303,10 @@ set scrolljump=5
 set scrolloff=3
 
 " netrw options
+" Map ,n to open netrw in the current working directory
 :map <Leader>n :edit .<CR>
+" Hide swap and undo files from netrw
+:let g:netrw_list_hide="^\.sw.*$,^\.*\.sw.*$,^\.*\.un\~"
 
 " vimwiki options
 :let g:vimwiki_list = [{'path': '~/mydocs/wiki/'}]
