@@ -112,3 +112,6 @@
 [submodule "bundle/vim-movar"]
 	path = bundle/vim-movar
 	url = git://github.com/robmiller/vim-movar.git
+[submodule "bundle/vim-unimpaired"]
+	path = bundle/vim-unimpaired
+	url = git://github.com/tpope/vim-unimpaired.git
