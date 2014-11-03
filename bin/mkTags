@@ -35,10 +35,14 @@ fi
 
 echo "Creating tags for directory '$dir' using alias '$name'"
 cd $dir
-exec ctags-exuberant -f ~/.vim.tags/$name \
--h ".php" -R \
+exec ctags-exuberant \
+-f ~/.vim.tags/$name \
+--languages=PHP \
+-R \
 --extra=+f \
 --exclude="\.svn" \
+--exclude="\.git/" \
+--exclude="vendor/" \
 --totals=yes \
 --tag-relative=yes \
 --fields=+afkst \

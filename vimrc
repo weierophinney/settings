@@ -51,6 +51,8 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 :set wildmenu
 :set wildmode=list:longest
 :set undofile
+:set splitbelow
+:set splitright
 
 " Remap F1 to escape, because that happens a lot when reaching. :)
 inoremap <F1> <ESC>
@@ -152,6 +154,15 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :call LoadTags("zf2")
 :call LoadTags("phpunit")
 
+" Function and command to load all apigility tags at once
+:function! LoadApigilityTags()
+:   let taglist = split ("zf-apigility zf-apigility-admin zf-apigility-example zf-apigility-skeleton zf-apigility-welcome zf-api-problem zf-configuration zf-content-negotiation zf-hal zf-rest zf-rpc zf-versioning")
+:   for tagfile in taglist
+:      call LoadTags(tagfile)
+:   endfor
+:endfunction
+:command! AgTag :call LoadApigilityTags()
+
 " PHP syntax settings
 :let php_sql_query=1
 :let php_htmlInStrings=1
@@ -161,10 +172,10 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :autocmd BufNewFile,BufRead *.php call PhpDocLoad()
 
 " PHP parser check (CTRL-L)
-:autocmd FileType php noremap <C-L> :w!<CR>:!$HOME/bin/php-5.4 -l %<CR>
+:autocmd FileType php noremap <C-L> :w!<CR>:!php -l %<CR>
 
 " run file with PHP CLI (CTRL-M)
-:autocmd FileType php noremap <C-M> :w!<CR>:!$HOME/bin/php-5.4 %<CR>
+:autocmd FileType php noremap <C-M> :w!<CR>:!php %<CR>
 
 " run file using PHPUnit (Leader-u)
 :autocmd FileType php noremap <Leader>u :w!<CR>:!!$HOME/bin/phpunit %<CR>
@@ -205,7 +216,8 @@ imap <Leader>k <Esc>lki
 :so $HOME/.vim/bufreplace.vim
 
 " The escape key is a long ways away. This maps it to the sequence 'kj'
-:map! kj <esc>
+:map! kj <Esc>
+:inoremap kj <Esc>
 
 " Turn on filetype plugins
 :filetype plugin on
@@ -306,10 +318,10 @@ set scrolloff=3
 " Map ,n to open netrw in the current working directory
 :map <Leader>n :edit .<CR>
 " Hide swap and undo files from netrw
-:let g:netrw_list_hide="^\.sw.*$,^\.*\.sw.*$,^\.*\.un\~"
+:let g:netrw_list_hide="^\.sw.*$,^\.*\.sw.*$,^\..*\.un[~]$"
 
 " vimwiki options
-:let g:vimwiki_list = [{'path': '~/mydocs/wiki/'}]
+:let g:vimwiki_list = [{'path': '~/mydocs/wiki/', 'ext': '.wmkd', 'syntax': 'markdown'}]
 
 " Color scheme
 " First line ensures we can have full spectrum of colors
@@ -378,10 +390,12 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 nnoremap <leader>1 yypVr=
 nnoremap <leader>2 yypVr-
 nnoremap <leader>3 yypVr^
-augroup markdown
-    au!
-    au BufNewFile,BufRead *.md,*.markdown,*.mkd setlocal filetype=ghmarkdown
-augroup END
+" augroup markdown
+"     au!
+"     au BufNewFile,BufRead *.md,*.markdown,*.mkd setlocal filetype=markdown
+" augroup END
+
+let g:markdown_enable_folding = 1
 
 " TagList options
 nnoremap <silent> <F8> :TlistToggle<CR>
@@ -445,10 +459,6 @@ let g:gist_browser_command = $HOME . "/bin/chrome %URL%"
 let g:gist_open_browser_after_post = 1
 let g:gist_show_privates = 1
 
-" vim-powerline settings
-let g:Powerline_symbols="unicode"
-let g:Powerline_cache_file="/home/matthew/tmp/Powerline-vim.cache"
-
 " syntastic settings
 let g:syntastic_check_on_open=0
 let g:syntastic_auto_jump=1
@@ -484,3 +494,16 @@ noremap <leader>yy "*Y
 
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+
+" From http://powerline.readthedocs.org/en/latest/tipstricks.html#vim
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
+
+" powerline settings
+set rtp+=$HOME/.local/lib/python3.4/site-packages/powerline/bindings/vim

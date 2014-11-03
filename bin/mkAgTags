@@ -1,0 +1,10 @@
+#!/bin/sh
+SCRIPT_PATH=$(readlink -f $0)
+SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+mkTags="$SCRIPT_DIR/mkTags"
+(
+    cd $HOME/git/modules/zfcampus ;
+    for d in zf-*;do
+        (cd $d ; $mkTags src $d)
+    done
+)

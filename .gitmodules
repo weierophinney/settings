@@ -79,9 +79,6 @@
 [submodule "bundle/phpcomplete.vim"]
 	path = bundle/phpcomplete.vim
 	url = https://github.com/EvanDotPro/phpcomplete.vim.git
-[submodule "bundle/vim-powerline"]
-	path = bundle/vim-powerline
-	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule "bundle/scratch.vim"]
 	path = bundle/scratch.vim
 	url = https://github.com/vim-scripts/scratch.vim.git
@@ -103,15 +100,12 @@
 [submodule "bundle/vimux"]
 	path = bundle/vimux
 	url = git://github.com/benmills/vimux.git
-[submodule "bundle/vim-markdown-folding"]
-	path = bundle/vim-markdown-folding
-	url = git://github.com/nelstrom/vim-markdown-folding.git
-[submodule "bundle/vim-flavored-markdown"]
-	path = bundle/vim-flavored-markdown
-	url = git://github.com/jtratner/vim-flavored-markdown.git
 [submodule "bundle/vim-movar"]
 	path = bundle/vim-movar
 	url = git://github.com/robmiller/vim-movar.git
 [submodule "bundle/vim-unimpaired"]
 	path = bundle/vim-unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
+[submodule "bundle/vim-powerline"]
+	path = bundle/vim-powerline
+	url = git://github.com/Lokaltog/vim-powerline.git
