@@ -465,21 +465,14 @@ let g:syntastic_auto_jump=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['php', 'javascript', 'json', 'html', 'sh', 'docbk', 'css', 'xml', 'xhtml'] }
+let g:syntastic_php_checkers = ['php', 'phpcs']
+let g:syntastic_php_phpcs_args = "--report=CSV --standard=PSR2"
+let g:syntastic_javascript_checkers = ['jshint']
 
 " Inline-Edit
 nnoremap <leader>e :InlineEdit<cr>
 xnoremap <leader>e :InlineEdit<cr>
 inoremap <c-e> <esc>:InlineEdit<cr>a
-
-" vim-php-cs-fixer
-let g:php_cs_fixer_path = "~/bin/php-cs-fixer"  " define the path to the php-cs-fixer.phar
-let g:php_cs_fixer_level = "psr2"               " which level ?
-let g:php_cs_fixer_config = "default"           " configuration
-let g:php_cs_fixer_php_path = "php"             " Path to PHP
-let g:php_cs_fixer_fixers_list = ""             " List of fixers
-let g:php_cs_fixer_default_mapping = 0          " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 0                  " Call command with dry-run option
-map <leader>pcf :call PhpCsFixerFixFile()<CR>
 
 " Switch.vim
 nnoremap <leader>- :Switch<cr>

@@ -91,9 +91,6 @@
 [submodule "bundle/php.vim"]
 	path = bundle/php.vim
 	url = git://github.com/shawncplus/php.vim.git
-[submodule "bundle/php-cs-fixer"]
-	path = bundle/php-cs-fixer
-	url = https://github.com/vim-scripts/php-cs-fixer.git
 [submodule "bundle/switch.vim"]
 	path = bundle/switch.vim
 	url = https://github.com/AndrewRadev/switch.vim.git
