@@ -1,7 +1,8 @@
 "  matchit.vim: (global plugin) Extended "%" matching
-"  Last Change: February 28, 2002
+"  Last Change: Fri Jan 25 10:00 AM 2008 EST
 "  Maintainer:  Benji Fisher PhD   <benji@member.AMS.org>
-"  Version:     1.4, for Vim 6.1
+"  Version:     1.13.2, for Vim 6.3+
+"  URL:		http://www.vim.org/script.php?script_id=39
 
 " Documentation:
 "  The documentation is in a separate file, matchit.txt .
@@ -14,7 +15,7 @@
 "  Support for many languages by Johannes Zellner
 "  Suggestions for improvement, bug reports, and support for additional
 "  languages by Jordi-Albert Batalla, Neil Bird, Servatius Brandt, Mark
-"  Collett, Stephen Wall, and Johannes Zellner.
+"  Collett, Stephen Wall, Dany St-Amant, Yuheng Xie, and Johannes Zellner.
 
 " Debugging:
 "  If you'd like to try the built-in debugging commands...
@@ -23,11 +24,16 @@
 "  variables.  See the MatchDebug() function, below, for details.
 
 " TODO:  I should think about multi-line patterns for b:match_words.
+"   This would require an option:  how many lines to scan (default 1).
+"   This would be useful for Python, maybe also for *ML.
 " TODO:  Maybe I should add a menu so that people will actually use some of
-" the features that I have implemented.
+"   the features that I have implemented.
 " TODO:  Eliminate the MultiMatch function.  Add yet another argument to
-" Match_wrapper() instead.
+"   Match_wrapper() instead.
 " TODO:  Allow :let b:match_words = '\(\(foo\)\(bar\)\):\3\2:end\1'
+" TODO:  Make backrefs safer by using '\V' (very no-magic).
+" TODO:  Add a level of indirection, so that custom % scripts can use my
+"   work but extend it.
 
 " allow user to prevent loading
 " and prevent duplicate loading
@@ -36,7 +42,7 @@ if exists("loaded_matchit") || &cp
 endif
 let loaded_matchit = 1
 let s:last_mps = ""
-let s:last_words = ""
+let s:last_words = ":"
 
 let s:save_cpo = &cpo
 set cpo&vim
@@ -58,6 +64,9 @@ vmap ]% <Esc>]%m'gv``
 onoremap <silent> [% v:<C-U>call <SID>MultiMatch("bW", "o") <CR>
 onoremap <silent> ]% v:<C-U>call <SID>MultiMatch("W",  "o") <CR>
 
+" text object:
+vmap a% <Esc>[%v]%
+
 " Auto-complete mappings:  (not yet "ready for prime time")
 " TODO Read :help write-plugin for the "right" way to let the user
 " specify a key binding.
@@ -73,10 +82,6 @@ onoremap <silent> ]% v:<C-U>call <SID>MultiMatch("W",  "o") <CR>
 "   execute "inoremap " . g:match_gthhoh . ' <C-O>:call <SID>Gthhoh()<CR>'
 " endif " gthhoh = "Get the heck out of here!"
 
-" Highlight group for error messages.  The user may choose to set this
-" to be invisible.
-hi link MatchError WarningMsg
-
 let s:notslash = '\\\@<!\%(\\\\\)*'
 
 function! s:Match_wrapper(word, forward, mode) range
@@ -87,20 +92,17 @@ function! s:Match_wrapper(word, forward, mode) range
   endif
   let restore_options = " ve=" . &ve . restore_options
   set ve=
-  " In s:CleanUp(), we may need to check whether the cursor moved forward.
-  let startline = line(".")
-  let startcol = col(".")
   " If this function was called from Visual mode, make sure that the cursor
   " is at the correct end of the Visual range:
   if a:mode == "v"
     execute "normal! gv\<Esc>"
   endif
-  " Use default behavior if called with a count or if no patterns are defined.
+  " In s:CleanUp(), we may need to check whether the cursor moved forward.
+  let startline = line(".")
+  let startcol = col(".")
+  " Use default behavior if called with a count.
   if v:count
     exe "normal! " . v:count . "%"
-    return s:CleanUp(restore_options, a:mode, startline, startcol)
-  elseif !exists("b:match_words") || b:match_words == ""
-    silent! normal! %
     return s:CleanUp(restore_options, a:mode, startline, startcol)
   end
 
@@ -109,8 +111,10 @@ function! s:Match_wrapper(word, forward, mode) range
   "   s:pat	parsed version of b:match_words
   "   s:all	regexp based on s:pat and the default groups
   "
-  " Allow b:match_words = "GetVimMatchWords()" .
-  if b:match_words =~ ":"
+  if !exists("b:match_words") || b:match_words == ""
+    let match_words = ""
+    " Allow b:match_words = "GetVimMatchWords()" .
+  elseif b:match_words =~ ":"
     let match_words = b:match_words
   else
     execute "let match_words =" b:match_words
@@ -120,13 +124,6 @@ function! s:Match_wrapper(word, forward, mode) range
     \ exists("b:match_debug")
     let s:last_words = match_words
     let s:last_mps = &mps
-    if match_words !~ s:notslash . '\\\d'
-      let s:do_BR = 0
-      let s:pat = match_words
-    else
-      let s:do_BR = 1
-      let s:pat = s:ParseWords(match_words)
-    endif
     " The next several lines were here before
     " BF started messing with this script.
     " quote the special chars in 'matchpairs', replace [,:] with \| and then
@@ -136,8 +133,15 @@ function! s:Match_wrapper(word, forward, mode) range
     let default = escape(&mps, '[$^.*~\\/?]') . (strlen(&mps) ? "," : "") .
       \ '\/\*:\*\/,#if\%(def\)\=:#else\>:#elif\>:#endif\>'
     " s:all = pattern with all the keywords
-    let s:all = s:pat . (strlen(s:pat) ? "," : "") . default
-    let s:all = substitute(s:all, s:notslash . '\zs[,:]\+', '\\|', 'g')
+    let match_words = match_words . (strlen(match_words) ? "," : "") . default
+    if match_words !~ s:notslash . '\\\d'
+      let s:do_BR = 0
+      let s:pat = match_words
+    else
+      let s:do_BR = 1
+      let s:pat = s:ParseWords(match_words)
+    endif
+    let s:all = substitute(s:pat, s:notslash . '\zs[,:]\+', '\\|', 'g')
     let s:all = '\%(' . s:all . '\)'
     " let s:all = '\%(' . substitute(s:all, '\\\ze[,:]', '', 'g') . '\)'
     if exists("b:match_debug")
@@ -156,7 +160,7 @@ function! s:Match_wrapper(word, forward, mode) range
   if a:word != ''
     " word given
     if a:word !~ s:all
-      echohl MatchError|echo 'Missing rule for word:"'.a:word.'"'|echohl NONE
+      echohl WarningMsg|echo 'Missing rule for word:"'.a:word.'"'|echohl NONE
       return s:CleanUp(restore_options, a:mode, startline, startcol)
     endif
     let matchline = a:word
@@ -164,22 +168,17 @@ function! s:Match_wrapper(word, forward, mode) range
     let prefix = '^\%('
     let suffix = '\)$'
   " Now the case when "word" is not given
-  elseif matchend(matchline, '.*' . s:all) < startcol
-    " there is no special word in this line || it ends before the cursor
-    echohl MatchError | echo "No matching rule applies here" | echohl NONE
-    return s:CleanUp(restore_options, a:mode, startline, startcol)
   else	" Find the match that ends on or after the cursor and set curcol.
     let regexp = s:Wholematch(matchline, s:all, startcol-1)
     let curcol = match(matchline, regexp)
-    let suf = strlen(matchline) - matchend(matchline, regexp)
-    let prefix = (curcol ? '^.\{'  . curcol . '}\%(' : '^\%(')
-    let suffix = (suf ? '\).\{' . suf . '}$'  : '\)$')
-    " If the match comes from the defaults, bail out.
-    if matchline !~ prefix .
-      \ substitute(s:pat, s:notslash.'\zs[,:]\+', '\\|', 'g') . suffix
-      silent! norm! %
+    " If there is no match, give up.
+    if curcol == -1
       return s:CleanUp(restore_options, a:mode, startline, startcol)
     endif
+    let endcol = matchend(matchline, regexp)
+    let suf = strlen(matchline) - endcol
+    let prefix = (curcol ? '^.*\%'  . (curcol + 1) . 'c\%(' : '^\%(')
+    let suffix = (suf ? '\)\%' . (endcol + 1) . 'c.*$'  : '\)$')
   endif
   if exists("b:match_debug")
     let b:match_match = matchstr(matchline, regexp)
@@ -219,6 +218,10 @@ function! s:Match_wrapper(word, forward, mode) range
   let ini = strpart(group, 0, i-1)
   let mid = substitute(strpart(group, i,j-i-1), s:notslash.'\zs:', '\\|', 'g')
   let fin = strpart(group, j)
+  "Un-escape the remaining , and : characters.
+  let ini = substitute(ini, s:notslash . '\zs\\\(:\|,\)', '\1', 'g')
+  let mid = substitute(mid, s:notslash . '\zs\\\(:\|,\)', '\1', 'g')
+  let fin = substitute(fin, s:notslash . '\zs\\\(:\|,\)', '\1', 'g')
   " searchpair() requires that these patterns avoid \(\) groups.
   let ini = substitute(ini, s:notslash . '\zs\\(', '\\%(', 'g')
   let mid = substitute(mid, s:notslash . '\zs\\(', '\\%(', 'g')
@@ -251,21 +254,24 @@ function! s:Match_wrapper(word, forward, mode) range
 
   " Fifth step:  actually start moving the cursor and call searchpair().
   " Later, :execute restore_cursor to get to the original screen.
-  let restore_cursor = line(".") . "G" . virtcol(".") . "|"
+  let restore_cursor = virtcol(".") . "|"
+  normal! g0
+  let restore_cursor = line(".") . "G" .  virtcol(".") . "|zs" . restore_cursor
   normal! H
   let restore_cursor = "normal!" . line(".") . "Gzt" . restore_cursor
   execute restore_cursor
-  normal! 0
-  if curcol
-    execute "normal!" . curcol . "l"
-  endif
+  call cursor(0, curcol + 1)
+  " normal! 0
+  " if curcol
+  "   execute "normal!" . curcol . "l"
+  " endif
   if skip =~ 'synID' && !(has("syntax") && exists("g:syntax_on"))
     let skip = "0"
   else
     execute "if " . skip . "| let skip = '0' | endif"
   endif
   let sp_return = searchpair(ini, mid, fin, flag, skip)
-  let final_position = line(".") . "normal!" . virtcol(".") . "|"
+  let final_position = "call cursor(" . line(".") . "," . col(".") . ")"
   " Restore cursor position and original screen.
   execute restore_cursor
   normal! m'
@@ -288,7 +294,7 @@ fun! s:CleanUp(options, mode, startline, startcol, ...)
     " (for example, d%).
     " This is only a problem if we end up moving in the forward direction.
   elseif (a:startline < line(".")) ||
-        \ (a:startline == line(".") && a:startcol < col("."))
+	\ (a:startline == line(".") && a:startcol < col("."))
     if a:0
       " Check whether the match is a single character.  If not, move to the
       " end of the match.
@@ -297,7 +303,7 @@ fun! s:CleanUp(options, mode, startline, startcol, ...)
       let regexp = s:Wholematch(matchline, a:1, currcol-1)
       let endcol = matchend(matchline, regexp)
       if endcol > currcol  " This is NOT off by one!
-        execute "normal!" . (endcol - currcol) . "l"
+	execute "normal!" . (endcol - currcol) . "l"
       endif
     endif " a:0
   endif " a:mode != "o" && etc.
@@ -392,6 +398,7 @@ fun! s:ParseWords(groups)
     endwhile " Now, tail has been used up.
     let parsed = parsed . ","
   endwhile " groups =~ '[^,:]'
+  let parsed = substitute(parsed, ',$', '', '')
   return parsed
 endfun
 
@@ -407,14 +414,10 @@ endfun
 " let j      = matchend(getline("."), regexp)
 " let match  = matchstr(getline("."), regexp)
 fun! s:Wholematch(string, pat, start)
-  if a:pat =~ '^\\%\=(.*\\)$'
-    let group = a:pat
-  else
-    let group = '\(' . a:pat . '\)'
-  endif
-  let prefix = (a:start ? '\(^.\{,' . a:start . '}\)\zs' : '^')
+  let group = '\%(' . a:pat . '\)'
+  let prefix = (a:start ? '\(^.*\%<' . (a:start + 2) . 'c\)\zs' : '^')
   let len = strlen(a:string)
-  let suffix = (a:start+1 < len ? '\(.\{,'.(len-a:start-1).'}$\)\@=' : '$')
+  let suffix = (a:start+1 < len ? '\(\%>'.(a:start+1).'c.*$\)\@=' : '$')
   if a:string !~ prefix . group . suffix
     let prefix = ''
   endif
@@ -566,7 +569,7 @@ fun! s:Choose(patterns, string, comma, branch, prefix, suffix, ...)
   if a:branch == ""
     let currpat = current
   else
-    let currpat = substitute(current, a:branch, '\\|', 'g')
+    let currpat = substitute(current, s:notslash . a:branch, '\\|', 'g')
   endif
   while a:string !~ a:prefix . currpat . a:suffix
     let tail = strpart(tail, i)
@@ -578,7 +581,7 @@ fun! s:Choose(patterns, string, comma, branch, prefix, suffix, ...)
     if a:branch == ""
       let currpat = current
     else
-      let currpat = substitute(current, a:branch, '\\|', 'g')
+      let currpat = substitute(current, s:notslash . a:branch, '\\|', 'g')
     endif
     if a:0
       let alttail = strpart(alttail, j)
@@ -646,7 +649,7 @@ fun! s:MultiMatch(spflag, mode)
   "   s:all	regexp based on s:pat and the default groups
   " This part is copied and slightly modified from s:Match_wrapper().
   let default = escape(&mps, '[$^.*~\\/?]') . (strlen(&mps) ? "," : "") .
-    \ '\/\*:\*\/,#if\%(def\)\=:$else\>:#elif\>:#endif\>'
+    \ '\/\*:\*\/,#if\%(def\)\=:#else\>:#elif\>:#endif\>'
   " Allow b:match_words = "GetVimMatchWords()" .
   if b:match_words =~ ":"
     let match_words = b:match_words
@@ -676,10 +679,13 @@ fun! s:MultiMatch(spflag, mode)
   " - TODO:  A lot of this is copied from s:Match_wrapper().
   " - maybe even more functionality should be split off
   " - into separate functions!
-  let open =  substitute(s:pat . default, ':[^,]*,', '\\),\\(', 'g')
-  let open =  '\(' . substitute(open, ':[^,]*$', '\\)', '')
-  let close = substitute(s:pat . default, ',[^,]*:', '\\),\\(', 'g')
-  let close = substitute(close, '[^,]*:', '\\(', '') . '\)'
+  let cdefault = (s:pat =~ '[^,]$' ? "," : "") . default
+  let open =  substitute(s:pat . cdefault,
+	\ s:notslash . '\zs:.\{-}' . s:notslash . ',', '\\),\\(', 'g')
+  let open =  '\(' . substitute(open, s:notslash . '\zs:.*$', '\\)', '')
+  let close = substitute(s:pat . cdefault,
+	\ s:notslash . '\zs,.\{-}' . s:notslash . ':', '\\),\\(', 'g')
+  let close = substitute(close, '^.\{-}' . s:notslash . ':', '\\(', '') . '\)'
   if exists("b:match_skip")
     let skip = b:match_skip
   elseif exists("b:match_comment") " backwards compatibility and testing!
@@ -688,7 +694,12 @@ fun! s:MultiMatch(spflag, mode)
     let skip = 's:comment\|string'
   endif
   let skip = s:ParseSkip(skip)
-  let restore_cursor = line(".") . "G" . virtcol(".") . "|"
+  " let restore_cursor = line(".") . "G" . virtcol(".") . "|"
+  " normal! H
+  " let restore_cursor = "normal!" . line(".") . "Gzt" . restore_cursor
+  let restore_cursor = virtcol(".") . "|"
+  normal! g0
+  let restore_cursor = line(".") . "G" .  virtcol(".") . "|zs" . restore_cursor
   normal! H
   let restore_cursor = "normal!" . line(".") . "Gzt" . restore_cursor
   execute restore_cursor
@@ -795,105 +806,6 @@ fun! s:ParseSkip(str)
   endif
   return skip
 endfun
-
-aug Matchit
-  let s:notend = '\%(\<end\s\+\)\@<!'
-  au!
-  " ASP:  Active Server Pages (with Visual Basic Script)
-  " thanks to Gontran BAERTS
-  au FileType aspvbs if !exists("b:match_words") |
-    \ do Matchit FileType html |
-  \ let b:match_words =
-  \ s:notend . '\<If\>:^\s\+\<Else\>:\<ElseIf\>:\<end\s\+\<if\>,' .
-  \ s:notend . '\<Select\s\+\<Case\>:\<Case\>:\<Case\s\+\<Else\>:' .
-  \	'\<End\s\+\<Select\>,' .
-  \ '^\s*\<Sub\>:\<End\s\+\<Sub\>,' .
-  \ '^\s*\<Function\>:\<End\s\+\<Function\>,' .
-  \ '\<Class\>:\<End\s\+\<Class\>,' .
-  \ '^\s*\<Do\>:\<Loop\>,' .
-  \ '^\s*\<For\>:\<Next\>,' .
-  \ '\<While\>:\<Wend\>,' .
-  \ b:match_words
-  \ | endif
-  " Csh:  thanks to Johannes Zellner
-  " - Both foreach and end must appear alone on separate lines.
-  " - The words else and endif must appear at the beginning of input lines;
-  "   the if must appear alone on its input line or after an else.
-  " - Each case label and the default label must appear at the start of a
-  "   line.
-  " - while and end must appear alone on their input lines.
-  au FileType csh,tcsh  if !exists("b:match_words") |
-    \ let b:match_words =
-      \ '^\s*\<if\>.*(.*).*\<then\>:'.
-      \   '^\s*\<else\>\s\+\<if\>.*(.*).*\<then\>:^\s*\<else\>:'.
-      \   '^\s*\<endif\>,'.
-      \ '\%(^\s*\<foreach\>\s\+\S\+\|^s*\<while\>\).*(.*):'.
-      \   '\<break\>:\<continue\>:^\s*\<end\>,'.
-      \ '^\s*\<switch\>.*(.*):^\s*\<case\>\s\+:^\s*\<default\>:^\s*\<endsw\>'
-      \ | endif
-  " DTD:  thanks to Johannes Zellner
-  " - match <!--, --> style comments.
-  " - match <! with >
-  " - TODO:  why does '--:--,'. not work ?
-  au! FileType dtd if !exists("b:match_words") |
-    \ let b:match_words =
-    \ '<!--:-->,'.
-    \ '<!:>'
-    \ | endif
-  " Entity:  see XML.
-  " Essbase:
-  au BufNewFile,BufRead *.csc if !exists("b:match_words") |
-    \ let b:match_words=
-  \ '\<fix\>:\<endfix\>,' .
-  \ '\<if\>:\<else\%(if\)\=\>:\<endif\>,' .
-  \ '\<!loopondimensions\>\|\<!looponselected\>:\<!endloop\>'
-  \ | endif
-  " HTML:  thanks to Johannes Zellner.
-    au FileType html,jsp if !exists("b:match_words") |
-      \	let b:match_ignorecase = 1 |
-      \	let b:match_skip = 's:Comment' |
-      \ let b:match_words = '<:>,' .
-      \ '<\@<=[ou]l[^>]*\%(>\|$\):<\@<=li>:<\@<=/[ou]l>,' .
-      \ '<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
-      \ | endif
-  " Pascal:
-  au FileType pascal if !exists("b:match_words") |
-    \ let b:match_words='\<begin\>:\<end\>'
-    \ | endif
-  " SGML:  see XML
-  " Shell:  thanks to Johannes Zellner
-  let s:sol = '\%(;\s*\|^\s*\)\@<='  " start of line
-  au FileType sh,config if !exists("b:match_words") |
-    \ let b:match_words =
-      \ s:sol.'if\>:' . s:sol.'elif\>:' . s:sol.'else\>:' . s:sol. 'fi\>,' .
-      \ s:sol.'\%(for\|while\)\>:' . s:sol. 'done\>,' .
-      \ s:sol.'case\>:' . s:sol. 'esac\>'
-      \ | endif
-  " RPM Spec:  thanks to Max Ischenko
-  au FileType spec if !exists("b:match_words") |
-    \ let b:match_ignorecase = 0 | let b:match_words =
-    \ '^Name:^%description:^%clean:^%setup:^%build:^%install:^%files:' .
-    \ '^%package:^%preun:^%postun:^%changelog'
-    \ | endif
-  " Tcsh:  see Csh
-  " XML:  thanks to Johannes Zellner and Akbar Ibrahim
-  " - case sensitive
-  " - don't match empty tags <fred/>
-  " - match <!--, --> style comments (but not --, --)
-  " - match <!, > inlined dtd's. This is not perfect, as it
-  "   gets confused for example by
-  "       <!ENTITY gt ">">
-  au! FileType xml,sgml,entity if !exists("b:match_words") |
-    \ let b:match_ignorecase=0 | let b:match_words =
-    \ '<:>,' .
-    \ '<\@<=!\[CDATA\[:]]>,'.
-    \ '<\@<=!--:-->,'.
-    \ '<\@<=?\k\+:?>,'.
-    \ '<\@<=\([^ \t>/]\+\)\%(\s\+[^>]*\%([^/]>\|$\)\|>\|$\):<\@<=/\1>,'.
-    \ '<\@<=\%([^ \t>/]\+\)\%(\s\+[^/>]*\|$\):/>'
-    \ | endif
-
-aug END
 
 let &cpo = s:save_cpo
 
