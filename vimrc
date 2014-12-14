@@ -123,6 +123,12 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :let g:closetag_html_style=1
 :autocmd Filetype html source $HOME . "/.vim/closetag.vim"
 
+" 2-space tab-width for HTML
+:autocmd FileType html set shiftwidth=2 tabstop=2 softtabstop=2
+
+" 2-space tab-width for CSS
+:autocmd FileType css set shiftwidth=2 tabstop=2 softtabstop=2
+
 " PHP options
 :function! PhpDocLoad()
 :   so $HOME/.vim/php-doc.vim
@@ -178,7 +184,7 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :autocmd FileType php noremap <C-M> :w!<CR>:!php %<CR>
 
 " run file using PHPUnit (Leader-u)
-:autocmd FileType php noremap <Leader>u :w!<CR>:!!$HOME/bin/phpunit %<CR>
+:autocmd FileType php noremap <Leader>u :w!<CR>:!phpunit %<CR>
 
 " Trim trailing whitespace and \r characters
 " autocmd FileType c,cpp,java,php,javascript,python,twig,xml,yml,phtml,vimrc autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -192,6 +198,9 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 
 " JSHint (CTRL-L when in a JS file)
 :autocmd FileType javascript noremap <C-L> :!jshint %<CR>
+
+" 2-space tab-width for JS
+:autocmd FileType javascript set shiftwidth=2 tabstop=2 softtabstop=2
 
 " Make a print macro (linux only)
 " :map <Leader>p :write !lpr<CR>

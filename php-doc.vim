@@ -68,11 +68,8 @@ let g:pdv_cfg_CommentSingle = "//"
 
 " Default values
 let g:pdv_cfg_Type = "mixed"
-let g:pdv_cfg_Package = "Ortus"
-let g:pdv_cfg_Version = "$Id: $"
-let g:pdv_cfg_Author = "Matthew Weier O'Phinney <matthew@zend.com>"
 let g:pdv_cfg_Copyright = "Copyright (C) 2006-Present, Zend Technologies, Inc."
-let g:pdv_cfg_License = "New BSD {@link http://framework.zend.com/license/new-bsd}"
+let g:pdv_cfg_License = "BSD 3-Clause License {@link http://opensource.org/licenses/BSD-3-Clause}"
 
 " TOB: let g:pdv_cfg_Type = "mixed"
 " TOB: let g:pdv_cfg_Package = ""
