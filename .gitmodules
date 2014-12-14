@@ -61,9 +61,6 @@
 [submodule "bundle/gundo.vim"]
 	path = bundle/gundo.vim
 	url = http://github.com/sjl/gundo.vim.git
-[submodule "bundle/PreciseJump"]
-	path = bundle/PreciseJump
-	url = https://github.com/vim-scripts/PreciseJump.git
 [submodule "bundle/vim-latex"]
 	path = bundle/vim-latex
 	url = https://github.com/weierophinney/vim-latex.github.com.git
