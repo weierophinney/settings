@@ -190,8 +190,8 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 ":inoremap <C-H> <ESC>:!phpm -e <C-R>=expand("<cword>")<CR><CR>
 ":nnoremap <C-H> <ESC>:!phpm -e <C-R>=expand("<cword>")<CR><CR>
 
-" JSLint (CTRL-L when in a JS file)
-:autocmd FileType javascript noremap <C-L> :!/home/matthew/bin/jslint %<CR>
+" JSHint (CTRL-L when in a JS file)
+:autocmd FileType javascript noremap <C-L> :!jshint %<CR>
 
 " Make a print macro (linux only)
 " :map <Leader>p :write !lpr<CR>
