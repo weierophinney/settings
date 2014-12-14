@@ -472,11 +472,27 @@ let g:gist_show_privates = 1
 let g:syntastic_check_on_open=0
 let g:syntastic_auto_jump=1
 let g:syntastic_auto_loc_list=1
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['php', 'javascript', 'json', 'html', 'sh', 'docbk', 'css', 'xml', 'xhtml'] }
-let g:syntastic_php_checkers = ['php', 'phpcs']
-let g:syntastic_php_phpcs_args = "--report=CSV --standard=PSR2"
+let g:syntastic_mode_map = 
+    \ {
+        \ 'mode': 'active',
+        \ 'active_filetypes': 
+            \ [
+                \ 'css',
+                \ 'docbk',
+                \ 'html',
+                \ 'javascript',
+                \ 'json',
+                \ 'php',
+                \ 'sh',
+                \ 'xhtml',
+                \ 'xml'
+            \ ]
+    \ }
+
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_json_checkers = ['jsonlint']
+let g:syntastic_php_checkers = ['php', 'phpcs']
+let g:syntastic_php_phpcs_args = "--report=csv --standard=PSR2"
 
 " Inline-Edit
 nnoremap <leader>e :InlineEdit<cr>
