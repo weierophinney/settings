@@ -6,7 +6,7 @@
 	url = https://github.com/othree/html5.vim.git
 [submodule "bundle/taglist.vim"]
 	path = bundle/taglist.vim
-	url = https://github.com/esukram/taglist.vim.git
+	url = https://github.com/vim-scripts/taglist.vim.git
 [submodule "bundle/snipmate.vim"]
 	path = bundle/snipmate.vim
 	url = https://github.com/weierophinney/snipmate.vim.git
