@@ -491,6 +491,7 @@ let g:syntastic_mode_map =
 
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_json_checkers = ['jsonlint']
+let g:syntastic_json_jsonlint_args = ['-q -c']
 let g:syntastic_php_checkers = ['php', 'phpcs']
 let g:syntastic_php_phpcs_args = "--report=csv --standard=PSR2"
 
