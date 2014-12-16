@@ -27,7 +27,7 @@
 	url = https://github.com/mileszs/ack.vim.git
 [submodule "bundle/vim-markdown"]
 	path = bundle/vim-markdown
-	url = https://github.com/weierophinney/vim-markdown.git
+	url = https://github.com/plasticboy/vim-markdown.git
 [submodule "bundle/argumentrewrap"]
 	path = bundle/argumentrewrap
 	url = https://github.com/weierophinney/argumentrewrap.git
