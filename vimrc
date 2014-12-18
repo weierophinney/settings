@@ -307,9 +307,6 @@ let perl_fold_blocks=1
 " :nmap <C-w> :tabclose<CR>
 " :imap <C-w> <ESC>:tabclose<CR>
 
-" Disable spellcheck
-" let spell_auto_type = ""
-
 " Map <S-F5> to turn spelling on (VIM 7.0+)
 map <S-F5> :setlocal spell spelllang=en_us<cr>
 
