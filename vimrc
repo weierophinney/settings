@@ -346,7 +346,6 @@ set scrolloff=3
 
 " snipMate options
 let g:snips_author = "Matthew Weier O'Phinney"
-let g:snippets_dir = $HOME . "/.vim/snippets/"
 
 " Highlight current line
 " source $HOME/.vim/plugin/highlight_cursor.vim
