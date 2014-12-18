@@ -103,3 +103,6 @@
 [submodule "bundle/vim-snippets"]
 	path = bundle/vim-snippets
 	url = git://github.com/honza/vim-snippets.git
+[submodule "bundle/vim-ragtag"]
+	path = bundle/vim-ragtag
+	url = git://github.com/tpope/vim-ragtag.git
