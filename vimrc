@@ -121,7 +121,7 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 
 " HTML tag closing macro
 :let g:closetag_html_style=1
-:autocmd Filetype html source $HOME . "/.vim/closetag.vim"
+:autocmd Filetype html source $HOME/.vim/closetag.vim"
 
 " 2-space tab-width for HTML
 :autocmd FileType html set shiftwidth=2 tabstop=2 softtabstop=2
