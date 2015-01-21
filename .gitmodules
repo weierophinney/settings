@@ -63,7 +63,7 @@
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "bundle/phpcomplete.vim"]
 	path = bundle/phpcomplete.vim
-	url = https://github.com/EvanDotPro/phpcomplete.vim.git
+	url = https://github.com/shawncplus/phpcomplete.vim.git
 [submodule "bundle/scratch.vim"]
 	path = bundle/scratch.vim
 	url = https://github.com/vim-scripts/scratch.vim.git
