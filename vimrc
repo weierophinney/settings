@@ -343,6 +343,8 @@ set scrolloff=3
 
 " snipMate options
 let g:snips_author = "Matthew Weier O'Phinney"
+:imap <C-T> <Plug>snipMateNextOrTrigger
+:smap <C-T> <Plug>snipMateNextOrTrigger
 
 " Highlight current line
 " source $HOME/.vim/plugin/highlight_cursor.vim
@@ -382,6 +384,12 @@ nnoremap <leader>f <C-w>s<C-w>j
 ":set statusline=%<%{GitBranch()}:%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 " This one is for the vim-fugitive plugin:
 :set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+" The following adds any Syntastic warnings to the status line when the cursor
+" is on a line that was flagged.
+:set statusline+=%#warningmsg#
+:set statusline+=%{SyntasticStatuslineFlag()}
+:set statusline+=%*
 
 " Added 16-Jun-2011: auto-cleans fugitive buffers
 " From http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
@@ -485,11 +493,12 @@ let g:syntastic_mode_map =
             \ ]
     \ }
 
+let g:syntastic_css_checkers = ['csslint']
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_json_jsonlint_args = ['-q -c']
 let g:syntastic_php_checkers = ['php', 'phpcs']
-let g:syntastic_php_phpcs_args = "--report=csv --standard=PSR2"
+let g:syntastic_php_phpcs_args = "--standard=PSR2 -n"
 
 " Inline-Edit
 nnoremap <leader>e :InlineEdit<cr>
