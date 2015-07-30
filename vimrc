@@ -501,9 +501,16 @@ let g:syntastic_php_checkers = ['php', 'phpcs']
 let g:syntastic_php_phpcs_args = "--standard=PSR2 -n"
 
 " Inline-Edit
-nnoremap <leader>e :InlineEdit<cr>
-xnoremap <leader>e :InlineEdit<cr>
+nnoremap <leader>i :InlineEdit<cr>
+xnoremap <leader>i :InlineEdit<cr>
 inoremap <c-e> <esc>:InlineEdit<cr>a
+let g:inline_edit_html_like_filetypes = ['phtml', 'mustache']
+let g:inline_edit_patterns = [
+    \   {
+    \       'main_filetype':    'mkd',
+    \       'callback':         'inline_edit#MarkdownFencedCode',
+    \   }
+    \ ]
 
 " Switch.vim
 nnoremap <leader>- :Switch<cr>
