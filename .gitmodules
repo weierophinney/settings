@@ -10,3 +10,6 @@
 [submodule "plugins/tmux-yank"]
 	path = plugins/tmux-yank
 	url = https://github.com/tmux-plugins/tmux-yank.git
+[submodule "plugins/tmux-copycat"]
+	path = plugins/tmux-copycat
+	url = https://github.com/tmux-plugins/tmux-copycat.git
