@@ -7,3 +7,6 @@
 [submodule "plugins/tmux-open"]
 	path = plugins/tmux-open
 	url = https://github.com/tmux-plugins/tmux-open.git
+[submodule "plugins/tmux-yank"]
+	path = plugins/tmux-yank
+	url = https://github.com/tmux-plugins/tmux-yank.git
