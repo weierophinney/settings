@@ -1,2 +1,5 @@
 .*.sw*
 .*.un~
+resurrect/*.txt
+resurrect/last
+resurrect/pane_contents.tar.gz
