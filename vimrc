@@ -44,7 +44,6 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 :set number
 :set background=dark
 :syntax on
-:set tags=$HOME/.vim/doc/tags
 :set ttyfast
 :set showcmd
 :set showmode
@@ -129,45 +128,11 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 " 2-space tab-width for CSS
 :autocmd FileType css set shiftwidth=2 tabstop=2 softtabstop=2
 
-" PHP options
-:function! PhpDocLoad()
-:   so $HOME/.vim/php-doc.vim
-:   inoremap <C-P><ESC> :call PhpDocSingle()<CR>i
-:   nnoremap <C-P> :call PhpDocSingle()<CR>
-:   vnoremap <C-P> :call PhpDocRange()<CR>
-:   inoremap ( ()<Left>
-:endfunction
-
 " Set keywordprg to use pman in PHP files
 :autocmd FileType php set keywordprg=/usr/local/zend/bin/pman
 
 " Add xdebug2 dictionary when in PHP files
 :autocmd FileType php set dictionary+=~/.vim/dic/xdebug2
-
-" Load a tag file
-" Loads a tag file from ~/.vim.tags/, based on the argument provided. The
-" command "Ltag"" is mapped to this function.
-:function! LoadTags(file)
-:   let tagspath = $HOME . "/.vim.tags/" . a:file
-:   let tagcommand = 'set tags+=' . tagspath
-:   execute tagcommand
-:endfunction
-:command! -nargs=1 Ltag :call LoadTags("<args>")
-
-" These are tag files I've created; you may want to remove/change these for your
-" own usage.
-" :call LoadTags("zf1")
-:call LoadTags("zf2")
-:call LoadTags("phpunit")
-
-" Function and command to load all apigility tags at once
-:function! LoadApigilityTags()
-:   let taglist = split ("zf-apigility zf-apigility-admin zf-apigility-example zf-apigility-skeleton zf-apigility-welcome zf-api-problem zf-configuration zf-content-negotiation zf-hal zf-rest zf-rpc zf-versioning")
-:   for tagfile in taglist
-:      call LoadTags(tagfile)
-:   endfor
-:endfunction
-:command! AgTag :call LoadApigilityTags()
 
 " PHP syntax settings
 :let php_sql_query=1
@@ -175,7 +140,6 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :let php_folding=1
 :let php_parent_error_close=1
 :let php_parent_error_open=1
-:autocmd BufNewFile,BufRead *.php call PhpDocLoad()
 
 " PHP parser check (CTRL-L)
 :autocmd FileType php noremap <C-L> :w!<CR>:!php -l %<CR>
@@ -526,18 +490,18 @@ noremap <leader>yy "*Y
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
-" From http://powerline.readthedocs.org/en/latest/tipstricks.html#vim
-if ! has('gui_running')
-    set ttimeoutlen=10
-    augroup FastEscape
-        autocmd!
-        au InsertEnter * set timeoutlen=0
-        au InsertLeave * set timeoutlen=1000
-    augroup END
-endif
-
-" powerline settings
-set rtp+=$HOME/.local/lib/python3.4/site-packages/powerline/bindings/vim
+" " From http://powerline.readthedocs.org/en/latest/tipstricks.html#vim
+" if ! has('gui_running')
+"     set ttimeoutlen=10
+"     augroup FastEscape
+"         autocmd!
+"         au InsertEnter * set timeoutlen=0
+"         au InsertLeave * set timeoutlen=1000
+"     augroup END
+" endif
+" 
+" " powerline settings
+" set rtp+=$HOME/.local/lib/python3.4/site-packages/powerline/bindings/vim
 
 " phpcomplete.vim settings
 let g:phpcomplete_complete_for_unkonwn_classes = 1
@@ -551,3 +515,24 @@ let g:phpcomplete_mappings =
     \     'jump_to_def_split': '<C-]>',
     \     'jump_to_def_vsplit': '<C-W><C-]>',
     \ }
+
+" gutentags settings
+let g:gutentags_exclude = ['*.css', '*.html', '*.js'] 
+let g:gutentags_cache_dir = '~/.vim.gutentags'
+
+" ctrlp settings
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+
+" pair gutentags with ctrlp
+map <silent> <leader>jd :CtrlPTag<cr><c-\>w
+
+" airline settings
+let g:airline_theme='solarized'
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = 'f'
+
+" tagbar-phpctags settings
+let g:tagbar_phpctags_bin='~/bin/phpctags'
+let g:tagbar_phpctags_memory_limit='512M'
