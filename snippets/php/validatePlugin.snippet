@@ -1,0 +1,35 @@
+/**
+ * Validate a plugin (v3)
+ *
+ * {@inheritDoc}
+ */
+public function validate($plugin)
+{
+	if (! $plugin instanceof $this->instanceOf) {
+		throw new InvalidServiceException(sprintf(
+			'Plugin of type "%s" is invalid; must implement %s',
+			(is_object($plugin) ? get_class($plugin) : gettype($plugin)),
+			$this->instanceOf
+		));
+	}
+}
+
+/**
+ * Validate a plugin (v2)
+ *
+ * {@inheritDoc}
+ *
+ * @throws ${1:}
+ */
+public function validatePlugin($plugin)
+{
+	try {
+		$this->validate($plugin);
+	} catch (InvalidServiceException $e) {
+		throw new ${2:$1}(
+			$e->getMessage(),
+			$e->getCode(),
+			$e
+		);
+	}
+}

@@ -1,0 +1,12 @@
+/**
+ * Create and return ${1:} instance
+ *
+ * For use with zend-servicemanager v2; proxies to __invoke().
+ *
+ * @param ServiceLocatorInterface $container
+ * @return ${2:$1}
+ */
+public function createService(ServiceLocatorInterface $container)
+{
+	return $this($container, ${3:$1}::class);
+}

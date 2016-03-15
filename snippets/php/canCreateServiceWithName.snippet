@@ -1,0 +1,9 @@
+/**
+ * {@inheritDoc}
+ *
+ * For use with zend-servicemanager v2; proxies to canCreate().
+ */
+public function canCreateServiceWithName(ServiceLocatorInterface $container, $name, $requestedName)
+{
+	return $this->canCreate($container, $requestedname);
+}
