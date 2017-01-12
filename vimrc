@@ -240,6 +240,11 @@ let perl_fold_blocks=1
 :nmap  ,,l :loadview<Cr>
 :autocmd BufWrite * mkview!
 :autocmd BufWinEnter *.* silent loadview
+" Following will prevent vim from closing folds in a current pane when opening a
+" new pane.
+" See http://stackoverflow.com/posts/30618494/revisions
+:autocmd InsertLeave,WinEnter * setlocal foldmethod=syntax
+:autocmd InsertEnter,WinLeave * setlocal foldmethod=manual
 
 " Comment options
 :set formatoptions=qroctn2
@@ -463,6 +468,14 @@ let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_json_jsonlint_args = ['-q -c']
 let g:syntastic_php_checkers = ['php', 'phpcs']
 let g:syntastic_php_phpcs_args = "--standard=PSR2 -n"
+
+" Disable syntastic on a per buffer basis
+function! SyntasticDisable()
+    let b:syntastic_skip_checks = 1
+    echo 'Syntastic disabled for this buffer'
+endfunction
+
+command! SyntasticDisable call SyntasticDisable()
 
 " Inline-Edit
 nnoremap <leader>i :InlineEdit<cr>
