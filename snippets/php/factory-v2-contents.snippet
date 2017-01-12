@@ -1,0 +1,4 @@
+if ($container instanceof AbstractPluginManager) {
+	$container = $container->getServiceLocator() ?: $container;
+}
+return $this($container, ${1}::class);${0}
