@@ -549,3 +549,15 @@ let g:airline#extensions#tagbar#flags = 'f'
 " tagbar-phpctags settings
 let g:tagbar_phpctags_bin='~/bin/phpctags'
 let g:tagbar_phpctags_memory_limit='512M'
+
+" php.vim overrides
+function! PhpSyntaxOverride()
+  " highlight annotations better
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
