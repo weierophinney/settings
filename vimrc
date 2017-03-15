@@ -543,7 +543,12 @@ let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-
+" The following are from https://github.com/robertbasic/vimstuff/blob/1b3a2b9483df999efd50e794550fa6ed434ef323/.vimrc#L223-L239
+" let g:ctrlp_match_current_file = 1
+let g:ctrlp_lazy_update = 1
+let g:ctrlp_extensions = ['tag', 'buffertag']
+" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_use_caching = 0
 " pair gutentags with ctrlp
 map <silent> <leader>jd :CtrlPTag<cr><c-\>w
 
