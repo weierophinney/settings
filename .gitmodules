@@ -127,3 +127,9 @@
 [submodule "bundle/tagbar-phpctags.vim"]
 	path = bundle/tagbar-phpctags.vim
 	url = https://github.com/vim-php/tagbar-phpctags.vim.git
+[submodule "bundle/vim-php-namespace"]
+	path = bundle/vim-php-namespace
+	url = https://github.com/arnaud-lb/vim-php-namespace
+[submodule "bundle/phpdcd.vim"]
+	path = bundle/phpcd.vim
+	url = https://github.com/lvht/phpcd.vim
