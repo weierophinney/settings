@@ -137,7 +137,7 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 " PHP syntax settings
 :let php_sql_query=1
 :let php_htmlInStrings=1
-:let php_folding=1
+:let php_folding=0
 :let php_parent_error_close=1
 :let php_parent_error_open=1
 
@@ -378,6 +378,7 @@ nnoremap <leader>3 yypVr^
 " augroup END
 
 let g:markdown_enable_folding = 1
+let g:markdown_enable_spell_checking = 0
 
 " TagList options
 nnoremap <silent> <F8> :TlistToggle<CR>
@@ -530,8 +531,13 @@ let g:phpcomplete_mappings =
     \ }
 
 " gutentags settings
-let g:gutentags_exclude = ['*.css', '*.html', '*.js'] 
 let g:gutentags_cache_dir = '~/.vim.gutentags'
+" The below was taken from https://robertbasic.com/blog/current-vim-setup-for-php-development/
+let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
+    \ '*.phar', '*.ini', '*.rst', '*.md',
+    \ '*vendor/*/test*', '*vendor/*/Test*',
+    \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
+    \ '*var/cache*', '*var/log*']
 
 " ctrlp settings
 let g:ctrlp_map = '<c-p>'
