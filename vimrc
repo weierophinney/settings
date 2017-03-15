@@ -418,6 +418,35 @@ nnoremap <silent> <leader>r :call argumentrewrap#RewrapArguments()<CR>
 " supertab settings
 let g:SuperTabDefaultCompletionType = "context"
 
+" The following are from https://github.com/lvht/phpcd.vim/issues/63 and
+" provide supertab integration for phpcd
+" List of contexts used for context completion.
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+
+" List of omni completion option names in the order of precedence that they
+" should be used if available.
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+
+" List of variable:completionType mappings.
+let g:SuperTabContextDiscoverDiscovery =
+    \ ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+
+" Supertab will provide an enhanced longest match support where typing one or
+" more letters and hitting tab again while in a completion mode will complete
+" the longest common match using the new text in the buffer.
+let g:SuperTabLongestEnhanced = 1
+
+" Sets whether or not to pre-highlight the first match when completeopt has the
+" popup menu enabled and the 'longest' option as well.
+let g:SuperTabLongestHighlight = 1
+
+" <cr> will cancel completion mode preserving the current text.
+let g:SuperTabCrMapping = 1
+
+" Supertab will attempt to close vim's completion preview window when the
+" completion popup closes (completion is finished or canceled).
+let g:SuperTabClosePreviewOnPopupClose = 1
+
 " tabular settings
 if exists(":Tabularize")
   nmap <Leader>a= :Tabularize /=<CR>
