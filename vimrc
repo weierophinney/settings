@@ -380,6 +380,9 @@ nnoremap <leader>3 yypVr^
 let g:markdown_enable_folding = 1
 let g:markdown_enable_spell_checking = 0
 
+" Use 80 character textwidth
+:autocmd FileType markdown set textwidth=80
+
 " TagList options
 nnoremap <silent> <F8> :TlistToggle<CR>
 let Tlist_Use_Right_Window = 1
