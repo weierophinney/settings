@@ -133,3 +133,6 @@
 [submodule "bundle/phpdcd.vim"]
 	path = bundle/phpcd.vim
 	url = https://github.com/lvht/phpcd.vim
+[submodule "bundle/vim-phpstan"]
+	path = bundle/vim-phpstan
+	url = https://github.com/phpstan/vim-phpstan
