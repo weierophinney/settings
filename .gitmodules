@@ -136,3 +136,6 @@
 [submodule "bundle/vim-phpstan"]
 	path = bundle/vim-phpstan
 	url = https://github.com/phpstan/vim-phpstan
+[submodule "bundle/vim-tmux-navigator"]
+	path = bundle/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git

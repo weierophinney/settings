@@ -141,8 +141,8 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :let php_parent_error_close=1
 :let php_parent_error_open=1
 
-" PHP parser check (CTRL-L)
-:autocmd FileType php noremap <C-L> :w!<CR>:!php -l %<CR>
+" PHP parser check (Leader + L)
+:autocmd FileType php noremap <Leader>l :w!<CR>:!php -l %<CR>
 
 " run file with PHP CLI (CTRL-M)
 :autocmd FileType php noremap <C-M> :w!<CR>:!php %<CR>
@@ -160,8 +160,8 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 ":inoremap <C-H> <ESC>:!phpm -e <C-R>=expand("<cword>")<CR><CR>
 ":nnoremap <C-H> <ESC>:!phpm -e <C-R>=expand("<cword>")<CR><CR>
 
-" JSHint (CTRL-L when in a JS file)
-:autocmd FileType javascript noremap <C-L> :!jshint %<CR>
+" JSHint (<Leader> l when in a JS file)
+:autocmd FileType javascript noremap <Leader>l :!jshint %<CR>
 
 " 2-space tab-width for JS
 :autocmd FileType javascript set shiftwidth=2 tabstop=2 softtabstop=2
@@ -341,12 +341,12 @@ if has("autocmd")
 endif
 
 " Map <leader>f to split horizontally, and move to bottom window
-nnoremap <leader>f <C-w>s<C-w>j
-" and use <ctrl> plus direction key to move around within windows
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
+" nnoremap <leader>f <C-w>s<C-w>j
+" Use <ctrl> plus direction key to move around within windows
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Added 2010-10-23: Include git branch, if available, in status line
 " This one is for the git-vim plugin:
@@ -630,3 +630,10 @@ autocmd FileType php noremap <Leader>s :call PhpSortUse()<CR>
 
 " Ensure any inserted 'use' statements are sorted correctly
 let g:php_namespace_sort_after_insert = 1
+
+"and  Prompt for and run a command in a tmux pane
+let g:VimuxHeight = "25"
+let g:VimuxOrientation = "v"
+let g:VimuxUseNearest = 0
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
