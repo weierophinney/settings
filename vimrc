@@ -637,3 +637,6 @@ let g:VimuxOrientation = "v"
 let g:VimuxUseNearest = 0
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
+
+" Coffeescript settings
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
