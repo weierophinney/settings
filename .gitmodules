@@ -145,3 +145,6 @@
 [submodule "bundle/phpactor"]
 	path = bundle/phpactor
 	url = https://github.com/phpactor/phpactor.git
+[submodule "bundle/tlib_vim"]
+	path = bundle/tlib_vim
+	url = https://github.com/tomtom/tlib_vim.git
