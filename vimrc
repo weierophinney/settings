@@ -530,13 +530,6 @@ let g:inline_edit_patterns = [
     \   }
     \ ]
 
-" Switch.vim
-nnoremap <leader>- :Switch<cr>
-autocmd FileType php let b:switch_definitions =
-    \ [
-    \   ['<?=', '<?php echo']
-    \ ]
-
 " Yank text to the clipboard easier
 noremap <leader>y "*y
 noremap <leader>yy "*Y
