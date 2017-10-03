@@ -86,6 +86,9 @@ vnoremap <F1> <ESC>
 :map <M-Esc>[65~ <S-MouseUp>
 :map! <M-Esc>[65~ <S-MouseUp>
 
+" This _may_ be needed to allow scrolling within tmux
+" :set ttymouse=xterm2
+
 " Turn on "very magic" regex status by default for searches.
 " :he /magic for more information
 :nnoremap / /\v
@@ -129,7 +132,8 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :autocmd FileType css set shiftwidth=2 tabstop=2 softtabstop=2
 
 " Set keywordprg to use pman in PHP files
-:autocmd FileType php set keywordprg=/usr/local/zend/bin/pman
+" Commented out 2017-07-12; do not have pman installed anywhere
+" :autocmd FileType php set keywordprg=/usr/local/zend/bin/pman
 
 " Add xdebug2 dictionary when in PHP files
 :autocmd FileType php set dictionary+=~/.vim/dic/xdebug2
@@ -148,7 +152,8 @@ autocmd BufNewFile *.php 0r ~/.vim/skeleton.php | normal Gdd
 :autocmd FileType php noremap <C-M> :w!<CR>:!php %<CR>
 
 " run file using PHPUnit (Leader-u)
-:autocmd FileType php noremap <Leader>u :w!<CR>:!phpunit %<CR>
+" Commented out 2017-07-12; typically using php-watch now. Also, conflicts with phpactor
+" :autocmd FileType php noremap <Leader>u :w!<CR>:!phpunit %<CR>
 
 " Trim trailing whitespace and \r characters
 " autocmd FileType c,cpp,java,php,javascript,python,twig,xml,yml,phtml,vimrc autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -294,6 +299,9 @@ set scrolloff=3
 :map <Leader>n :edit .<CR>
 " Hide swap and undo files from netrw
 :let g:netrw_list_hide="^\.sw.*$,^\.*\.sw.*$,^\..*\.un[~]$"
+" Use tree view by default
+" See https://medium.com/@acparas/tips-5c3082a50c07
+:let g:netrw_liststyle=3 " 3 means tree-style
 
 " vimwiki options
 :let g:vimwiki_list = [{'path': '~/mydocs/wiki/', 'ext': '.wmkd', 'syntax': 'markdown'}]
@@ -550,17 +558,18 @@ noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 " set rtp+=$HOME/.local/lib/python3.4/site-packages/powerline/bindings/vim
 
 " phpcomplete.vim settings
-let g:phpcomplete_complete_for_unkonwn_classes = 1
-let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
-let g:phpcomplete_parse_docblock_comments = 1
-let g:phpcomplete_cache_taglists = 1
-let g:phpcomplete_enhance_jump_to_definition = 1
-let g:phpcomplete_mappings =
-    \ {
-    \     'jump_to_def': ',g',
-    \     'jump_to_def_split': '<C-]>',
-    \     'jump_to_def_vsplit': '<C-W><C-]>',
-    \ }
+" Disabled 2017-07-12 in order to try phpactor
+" let g:phpcomplete_complete_for_unknown_classes = 1
+" let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
+" let g:phpcomplete_parse_docblock_comments = 1
+" let g:phpcomplete_cache_taglists = 1
+" let g:phpcomplete_enhance_jump_to_definition = 1
+" let g:phpcomplete_mappings =
+"     \ {
+"     \     'jump_to_def': ',g',
+"     \     'jump_to_def_split': '<C-]>',
+"     \     'jump_to_def_vsplit': '<C-W><C-]>',
+"     \ }
 
 " gutentags settings
 let g:gutentags_cache_dir = '~/.vim.gutentags'
@@ -609,12 +618,13 @@ augroup END
 " vim-php-namespace
 " Map <leader>u to insert a 'use' statement for the class name currently under
 " the cursor
-function! IPhpInsertUse()
-    call PhpInsertUse()
-    call feedkeys('a',  'n')
-endfunction
-autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
-autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
+" Commented out 2017-07-12; phpactor provides this.
+" function! IPhpInsertUse()
+"     call PhpInsertUse()
+"     call feedkeys('a',  'n')
+" endfunction
+" autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+" autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
 
 " Map <leader>e to expand the class name under the cursor to its FQCN
 function! IPhpExpandClass()
@@ -631,7 +641,7 @@ autocmd FileType php noremap <Leader>s :call PhpSortUse()<CR>
 " Ensure any inserted 'use' statements are sorted correctly
 let g:php_namespace_sort_after_insert = 1
 
-"and  Prompt for and run a command in a tmux pane
+" Prompt for and run a command in a tmux pane
 let g:VimuxHeight = "25"
 let g:VimuxOrientation = "v"
 let g:VimuxUseNearest = 0
@@ -640,3 +650,19 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 
 " Coffeescript settings
 autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
+" phpactor settings
+" Omni-completion
+autocmd FileType php setlocal omnifunc=phpactor#Complete
+
+" Include use statement
+map <Leader>u :call phpactor#UseAdd()<CR>
+map <Leader>o :call phpactor#GotoType()<CR>
+map <Leader>pd :call phpactor#OffsetTypeInfo()<CR>
+map <Leader>i :call phpactor#ReflectAtOffset()<CR>
+map <Leader>pfm :call phpactor#MoveFile()<CR>
+map <Leader>pfc :call phpactor#CopyFile()<CR>
+map <Leader>tt :call phpactor#Transform()<CR>
+
+" Show information about "type" under cursor including current frame
+nnoremap <silent><Leader>d :call phpactor#OffsetTypeInfo()<CR>

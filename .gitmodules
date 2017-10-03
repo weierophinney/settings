@@ -64,9 +64,6 @@
 [submodule "bundle/phpcomplete.vim"]
 	path = bundle/phpcomplete.vim
 	url = https://github.com/shawncplus/phpcomplete.vim.git
-[submodule "bundle/scratch.vim"]
-	path = bundle/scratch.vim
-	url = https://github.com/vim-scripts/scratch.vim.git
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
@@ -142,3 +139,18 @@
 [submodule "bundle/vim-coffee-script"]
 	path = bundle/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "bundle/vim-ansiesc"]
+	path = bundle/vim-ansiesc
+	url = git://github.com/vim-scripts/AnsiEsc.vim.git
+[submodule "bundle/vim-AnsiEsc"]
+	path = bundle/vim-AnsiEsc
+	url = https://github.com/jbnicolai/vim-AnsiEsc.git
+[submodule "bundle/nginx.vim"]
+	path = bundle/nginx.vim
+	url = https://github.com/vim-scripts/nginx.vim.git
+[submodule "phpactor"]
+	path = phpactor
+	url = https://github.com/phpactor/phpactor.git
+[submodule "bundle/phpactor"]
+	path = bundle/phpactor
+	url = https://github.com/phpactor/phpactor.git
