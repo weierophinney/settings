@@ -40,9 +40,6 @@
 [submodule "bundle/mustache.vim"]
 	path = bundle/mustache.vim
 	url = https://github.com/weierophinney/mustache.vim.git
-[submodule "bundle/vim-task"]
-	path = bundle/vim-task
-	url = https://github.com/weierophinney/vim-task.git
 [submodule "bundle/vimwiki"]
 	path = bundle/vimwiki
 	url = https://github.com/weierophinney/vimwiki.git
@@ -70,9 +67,6 @@
 [submodule "bundle/inline_edit"]
 	path = bundle/inline_edit
 	url = git://github.com/AndrewRadev/inline_edit.vim.git
-[submodule "bundle/switch.vim"]
-	path = bundle/switch.vim
-	url = https://github.com/AndrewRadev/switch.vim.git
 [submodule "bundle/vimux"]
 	path = bundle/vimux
 	url = git://github.com/benmills/vimux.git
@@ -85,9 +79,6 @@
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
 	url = git://github.com/elzr/vim-json.git
-[submodule "bundle/tlib_vim"]
-	path = bundle/tlib_vim
-	url = git://github.com/tomtom/tlib_vim.git
 [submodule "bundle/vim-addon-mw-utils"]
 	path = bundle/vim-addon-mw-utils
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
