@@ -537,19 +537,6 @@ noremap <leader>yy "*Y
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
-" " From http://powerline.readthedocs.org/en/latest/tipstricks.html#vim
-" if ! has('gui_running')
-"     set ttimeoutlen=10
-"     augroup FastEscape
-"         autocmd!
-"         au InsertEnter * set timeoutlen=0
-"         au InsertLeave * set timeoutlen=1000
-"     augroup END
-" endif
-" 
-" " powerline settings
-" set rtp+=$HOME/.local/lib/python3.4/site-packages/powerline/bindings/vim
-
 " phpcomplete.vim settings
 " Disabled 2017-07-12 in order to try phpactor
 " let g:phpcomplete_complete_for_unknown_classes = 1
