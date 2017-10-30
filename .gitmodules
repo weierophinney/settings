@@ -13,3 +13,6 @@
 [submodule "plugins/tmux-copycat"]
 	path = plugins/tmux-copycat
 	url = https://github.com/tmux-plugins/tmux-copycat.git
+[submodule "plugins/tpm"]
+	path = plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git
