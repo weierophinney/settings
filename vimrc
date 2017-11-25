@@ -651,3 +651,4 @@ nnoremap <silent><Leader>d :call phpactor#OffsetTypeInfo()<CR>
 augroup filetypedetect
     au BufRead,BufNewFile *.tsx setfiletype typescript
 augroup END
+let g:syntastic_typescript_tsc_args = "--jsx preserve --noEmit --experimentalDecorators --lib dom,es2015"
