@@ -646,3 +646,8 @@ map <Leader>tt :call phpactor#Transform()<CR>
 
 " Show information about "type" under cursor including current frame
 nnoremap <silent><Leader>d :call phpactor#OffsetTypeInfo()<CR>
+
+" Associate .tsx with typescript filetype
+augroup filetypedetect
+    au BufRead,BufNewFile *.tsx setfiletype typescript
+augroup END
