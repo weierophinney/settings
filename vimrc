@@ -38,6 +38,7 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 :set encoding=utf-8
 :set expandtab
 :set textwidth=80
+:set colorcolumn=80
 :set tabstop=4
 :set softtabstop=4
 :set shiftwidth=4
